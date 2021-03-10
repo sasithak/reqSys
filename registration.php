@@ -20,23 +20,25 @@
         $password = mysqli_real_escape_string($con, $password);
         $firstname = stripslashes($_REQUEST['firstname']);
         $firstname = mysqli_real_escape_string($con, $firstname);
-	$lastname = stripslashes($_REQUEST['lastname']);
+	    $lastname = stripslashes($_REQUEST['lastname']);
         $lastname = mysqli_real_escape_string($con, $lastname);
-	$acctype = stripslashes($_REQUEST['acctype']);
+	    $acctype = stripslashes($_REQUEST['acctype']);
         $acctype = mysqli_real_escape_string($con, $acctype);
-        $query    = "INSERT into `users` (username, password, email, firstname, lastname,acctype)
-                     VALUES ('$username', '" . md5($password) . "', '$email', '$firstname', '$lastname','$acctype')";
+        $query    = "INSERT into `users` (username, password, email, firstname, lastname,acctype) 
+                    VALUES ('$username', '" . md5($password) . "', '$email', '$firstname', '$lastname','$acctype')";
         $result   = mysqli_query($con, $query);
         if ($result) {
-            echo "<div class='form'>
-                  <h3>You are registered successfully.</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a></p>
-                  </div>";
+            echo  "
+                <div class='form'>
+                    <h3>You are registered successfully.</h3><br/>
+                    <p class='link'>Click here to <a href='login.php'>Login</a></p>
+                </div>";
         } else {
-            echo "<div class='form'>
-                  <h3>Required fields are missing.</h3><br/>
-                  <p class='link'>Click here to <a href='registration.php'>register</a> again.</p>
-                  </div>";
+            echo "
+                <div class='form'>
+                    <h3>Required fields are missing.</h3><br/>
+                    <p class='link'>Click here to <a href='registration.php'>register</a> again.</p>
+                </div>";
         }
     } else {
 ?>
