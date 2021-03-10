@@ -42,21 +42,24 @@
         }
     } else {
 ?>
+
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
         <input type="text" class="login-input" name="username" placeholder="Username" required />
         <input type="text" class="login-input" name="email" placeholder="Email Address">
         <input type="password" class="login-input" name="password" placeholder="Password">
         <input type="submit" name="submit" value="Register" class="login-button">
-	<label for="accType">Account type: </label>
-                <select name="accType" id="accType">
-                    <option value="students">Student</option>
-                    <option value="staff">Academic Staff</option>
-                </select>
+	    <label for="accType">Account type: </label>
+            <select name="accType" id="accType">
+                <option value="students">Student</option>
+                <option value="staff">Academic Staff</option>
+            </select>
         <p class="link"><a href="login.php">Click to Login</a></p>
     </form>
+
 <?php
     }
 ?>
+
 </body>
 </html>
