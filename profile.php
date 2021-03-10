@@ -1,5 +1,5 @@
 <?php
-include_once 'header.php';
+include_once 'auth_session.php';
 include_once './includes/dbh.inc.php';
 include_once './includes/funcMain.inc.php';
 
