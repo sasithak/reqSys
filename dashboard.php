@@ -21,7 +21,7 @@ include("auth_session.php");
     $userName = $_SESSION["userName"];
     $accessLevel = $_SESSION["accessLevel"];
 
-    if (isset($_GET["login"]) || isset($_GET["signup"])) {
+    if (isset($_GET["login"])) {
         echo "<h3>Welcome $userName</h3>";
     }
 
