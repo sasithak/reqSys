@@ -1,7 +1,7 @@
 <?php
     include_once 'auth_session.php';
     include_once './includes/funcMain.inc.php';
-    include_once './includes/dbh.inc.php';
+    include_once './db.php';
 
     $userId = $_SESSION["userUid"];
     $userName = $_SESSION["userName"];
