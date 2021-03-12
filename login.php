@@ -21,6 +21,8 @@
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
             $_SESSION['username'] = $username;
+            $_SESSION['accType'] = $rows['acctype'];
+            $_SESSION['indexNo'] = $rows['indexNo'];
             // Redirect to user dashboard page
             header("Location: dashboard.php/?login=success");
         } else {
