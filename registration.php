@@ -26,7 +26,7 @@
         $lastname = mysqli_real_escape_string($con, $lastname);
 	$acc_type = stripslashes($_REQUEST['acc_type']);
         $acc_type = mysqli_real_escape_string($con, $acc_type);
-        $query    = "INSERT into `userlist` (username, password, email, firstname, lastname, acc_type, index) 
+        $query    = "INSERT into `userlist` (username, pwd, email, firstname, lastname, acc_type, indexNo) 
                     VALUES ('$username', '" . md5($password) . "', '$email', '$firstname', '$lastname','$acc_type', '$index')";
         $result   = mysqli_query($con, $query);
         if ($result) {

@@ -14,11 +14,11 @@ include("auth_session.php");
 <body>
     <?php
     include_once './includes/funcMain.inc.php';
-    include_once './includes/dbh.inc.php';
+    include_once './db.php';
     head();
     
-    $userId = $_SESSION["userUid"];
-    $userName = $_SESSION["userName"];
+    $userId = $_SESSION["indexNo"];
+    $userName = $_SESSION["username"];
     $accessLevel = $_SESSION["accessLevel"];
 
     if (isset($_GET["login"])) {

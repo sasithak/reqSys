@@ -119,8 +119,8 @@ function loginUser($conn, $uid, $pwd){
 }
 
 function head() {
-    $name = $_SESSION["userName"];
-    $uid =  $_SESSION["userUid"];
+    $name = $_SESSION["username"];
+    $uid =  $_SESSION["indexNo"];
     echo
     '<header>
         <table>
