@@ -16,16 +16,18 @@
         $username = mysqli_real_escape_string($con, $username);
         $email    = stripslashes($_REQUEST['email']);
         $email    = mysqli_real_escape_string($con, $email);
+	$index = stripslashes($_REQUEST['index']);
+        $index = mysqli_real_escape_string($con, $index);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         $firstname = stripslashes($_REQUEST['firstname']);
         $firstname = mysqli_real_escape_string($con, $firstname);
-	    $lastname = stripslashes($_REQUEST['lastname']);
+	$lastname = stripslashes($_REQUEST['lastname']);
         $lastname = mysqli_real_escape_string($con, $lastname);
-	    $acctype = stripslashes($_REQUEST['acctype']);
-        $acctype = mysqli_real_escape_string($con, $acctype);
-        $query    = "INSERT into `users` (username, password, email, firstname, lastname,acctype) 
-                    VALUES ('$username', '" . md5($password) . "', '$email', '$firstname', '$lastname','$acctype')";
+	$acc_type = stripslashes($_REQUEST['acc_type']);
+        $acc_type = mysqli_real_escape_string($con, $acc_type);
+        $query    = "INSERT into `userlist` (username, password, email, firstname, lastname, acc_type, index) 
+                    VALUES ('$username', '" . md5($password) . "', '$email', '$firstname', '$lastname','$acc_type', '$index')";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo  "
@@ -45,15 +47,24 @@
 
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="username" placeholder="Username" required />
-        <input type="text" class="login-input" name="email" placeholder="Email Address">
-        <input type="password" class="login-input" name="password" placeholder="Password">
-        <input type="submit" name="submit" value="Register" class="login-button">
-	    <label for="accType">Account type: </label>
-            <select name="accType" id="accType">
-                <option value="students">Student</option>
-                <option value="staff">Academic Staff</option>
-            </select>
+	<label>First name:</label>
+	<input type="text" class="login-input" name="firstname" required />
+	<label>Last name:</label>
+	<input type="text" class="login-input" name="lastname" required />
+	<label>Index number:</label>
+	<input type="text" class="login-input" name="index" required />
+	<label>Preferred username:</label>
+        <input type="text" class="login-input" name="username" required />
+	<label>Email address:</label>
+        <input type="text" class="login-input" name="email">
+	<label>Password:</label>
+        <input type="password" class="login-input" name="password">
+	<label for="acc_type">Account type: </label>
+        <select name="acc_type" id="acc_type">
+        	<option value="students">Student</option>
+		<option value="staff">Academic Staff</option>
+	</select>
+	<input type="submit" name="submit" value="Register" class="login-button">
         <p class="link"><a href="login.php">Click to Login</a></p>
     </form>
 
