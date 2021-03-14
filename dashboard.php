@@ -1,5 +1,4 @@
 <?php
-//include auth_session.php file on all user panel pages
 include("auth_session.php");
 ?>
 
@@ -9,7 +8,7 @@ include("auth_session.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="./styles/stylesMain.css">
+    <link rel="stylesheet" href="./style_main.css">
 </head>
 <body>
     <?php

@@ -25,6 +25,8 @@ if (isset($_GET['id'])){
             $displayName = $userData["firstname"]." ".$userData["lastname"];
             echo $displayName.'
     </title>
+    <link rel="stylesheet" href="./style_main.css">
+    </head>
     <body>';
             head();
             echo '
