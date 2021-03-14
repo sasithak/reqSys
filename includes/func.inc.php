@@ -137,3 +137,13 @@ function addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content
     $sql = "INSERT INTO `".$postId."` (userId, userName, userFullName, postDate, postTime, content, file, ftp, fileLocation) VALUES ('$uid', '$userName', '$name', '$date', '$time', '$content', '$isFile', '$ftp', '$fileLocation')";
     mysqli_query($conn, $sql);
 }
+
+function getUser($conn, $viewId) {
+    $query    = "SELECT * FROM userlist WHERE indexNo='$viewId'";
+    $result = mysqli_query($conn, $query);
+    $row;
+    if ($result && $rows = mysqli_num_rows($result)) {
+        $row = mysqli_fetch_assoc($result);
+    }
+    return $row;
+}
