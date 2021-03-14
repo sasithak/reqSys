@@ -1,195 +1,136 @@
 <?php
 
-function studentUidExists($conn, $uid, $login) {
-    $sql = "SELECT * FROM students WHERE userId = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        if ($login == false) {
-        header("location: ../signup.php?error=stUidStmtFailed");
-        exit();} else {
-            header("location: ../index.php?error=stUidStmtFailed");
-        exit();
+function head() {
+    $name = $_SESSION["name"];
+    $uid =  $_SESSION["indexNo"];
+    echo
+    '<header>
+        <table>
+            <tr>
+                <th><a href="./dashboard.php">Home</a></th>
+                <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
+                <th><a href="./logout.php">Logout</a></th>
+            </tr>
+        </table>
+    </header>';
+}
+
+function pending($row) {
+    $postId = $row["postId"];
+    $createdUser = $row["userName"];
+    $createdUserId = $row["userId"];
+    $postDate = $row["createdDate"];
+    $postTime = $row["createdTime"];
+    $status = $row["currStatus"];
+    $subject = $row["postSubject"];
+
+    echo '
+                        <tr class="reqTable-pending">
+                            <td class="reqTable-data no">'.$cnt.'</td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data user">'.$createdUser.'</td>
+                            <td class="reqTable-data date">'.$postDate.'</td>
+                            <td class="reqTable-data time">'.$postTime.'</td>
+                            <td class="reqTable-data status">Pending</td>
+                        </tr>';
+}
+
+function approved($row) {
+    $postId = $row["postId"];
+    $createdUser = $row["userName"];
+    $createdUserId = $row["userId"];
+    $postDate = $row["createdDate"];
+    $postTime = $row["createdTime"];
+    $status = $row["currStatus"];
+    $subject = $row["postSubject"];
+    $arr = explode("-", $status);
+    $action = $arr[0];
+    $actionUserName = $arr[2];
+    $actionUserId = $arr[1];
+
+    echo '
+                        <tr class="reqTable-approved">
+                            <td class="reqTable-data no">'.$cnt.'</td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data date">'.$postDate.'</td>
+                            <td class="reqTable-data time">'.$postTime.'</td>
+                            <td class="reqTable-data status">Approved by '.$actionUserId.'</td>
+                        </tr>';
+}
+
+function declined($row) {
+    $postId = $row["postId"];
+    $createdUser = $row["userName"];
+    $createdUserId = $row["userId"];
+    $postDate = $row["createdDate"];
+    $postTime = $row["createdTime"];
+    $status = $row["currStatus"];
+    $subject = $row["postSubject"];
+    $arr = explode("-", $status);
+    $action = $arr[0];
+    $actionUserName = $arr[2];
+    $actionUserId = $arr[1];
+
+    echo '
+                        <tr class="reqTable-declined">
+                            <td class="reqTable-data no">'.$cnt.'</td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data date">'.$postDate.'</td>
+                            <td class="reqTable-data time">'.$postTime.'</td>
+                            <td class="reqTable-data status">Declined by '.$actionUserId.'</td>
+                        </tr>'; 
+}
+
+function more_info($row) {
+    $postId = $row["postId"];
+    $createdUser = $row["userName"];
+    $createdUserId = $row["userId"];
+    $postDate = $row["createdDate"];
+    $postTime = $row["createdTime"];
+    $status = $row["currStatus"];
+    $subject = $row["postSubject"];
+    $arr = explode("-", $status);
+    $action = $arr[0];
+    $actionUserName = $arr[2];
+    $actionUserId = $arr[1];
+
+    echo '
+                        <tr class="reqTable-moreInfo">
+                            <td class="reqTable-data no">'.$cnt.'</td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data date">'.$postDate.'</td>
+                            <td class="reqTable-data time">'.$postTime.'</td>
+                            <td class="reqTable-data status">More information requested by '.$actionUserId.'</td>
+                        </tr>'; 
+}
+
+function createRequest($conn, $postId, $uid, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation) {
+    $sql = "INSERT INTO discussions (postId, userId, userName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$name', '$date', '$time', '$subject', '$status');";
+    if (mysqli_query($conn, $sql)) {
+        $sql2 = "CREATE TABLE `".$postId."` (
+            id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            userId varchar(10) NOT NULL,
+            userName varchar(50) NOT NULL,
+            postDate varchar(20) NOT NULL,
+            postTime varchar(20) NOT NULL,
+            content varchar(3000) NOT NULL,
+            file varchar(10) NOT NULL,
+            ftp varchar(10) NOT NULL,
+            fileLocation varchar(256) NOT NULL
+        );";
+        if (mysqli_query($conn, $sql2)) {
+            addEntry($conn, $postId, $uid, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
+        } else {
+            $sql3 = "DELETE FROM discussions WHERE postId = ".$postId.";";
+            mysqli_query($conn, $sql3);
+            header("Location: ../newRequest?error=dbError"."-".mysqli_error($conn));
         }
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $uid);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
     } else {
-        $result = false;
-        return $result;
+        header("Location: ../newRequest?error=dbError"."-".mysqli_error($conn));
     }
-
-    mysqli_stmt_close($stmt);
 }
 
-function staffUidExists($conn, $uid, $login) {
-    $sql = "SELECT * FROM staff WHERE userId = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        if ($login == false) {
-        header("location: ../signup.php?error=asUidStmtFailed");
-        exit();} else {
-            header("location: ../index.php?error=asUidStmtFailed");
-        exit();
-        }
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $uid);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        $result = false;
-        return $result;
-    }
-
-    mysqli_stmt_close($stmt);
-}
-
-function studentEmailExists($conn, $email) {
-    $sql = "SELECT * FROM students WHERE email = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=stEmailStmtFailed");
-        exit();
-    }
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        $result = false;
-        return $result;
-    }
-
-    mysqli_stmt_close($stmt);
-}
-
-function staffEmailExists($conn, $email) {
-    $sql = "SELECT * FROM staff WHERE email = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=asEmailStmtFailed");
-        exit();
-    }
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        $result = false;
-        return $result;
-    }
-
-    mysqli_stmt_close($stmt);
-}
-
-function createStudent($conn, $accessLevel, $fName, $lName, $dName, $email, $uid, $pwd) {
-    $sql = "INSERT INTO students (firstName, lastName, displayName, email, userId, pwd, accessLevel) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=createStStmtFailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssssssi", $fName, $lName, $dName, $email, $uid, $hashedPwd, $accessLevel);
-    mysqli_stmt_execute($stmt);
-    session_start();
-    $uidExists = uidExists($conn, $uid);
-    $_SESSION["userId"] = $uidExists["id"];
-    $_SESSION["userUid"] = $uidExists["userId"];
-    $_SESSION["userName"] = $uidExists["displayName"];
-    $_SESSION["accessLevel"] = $uidExists["accessLevel"];
-    header("location: ../dashboard.php?signup=success");
-    mysqli_stmt_close($stmt);
-    exit();
-}
-
-function createTeacher($conn, $accessLevel, $fName, $lName, $dName, $email, $uid, $pwd) {
-    $sql = "INSERT INTO staff (firstName, lastName, displayName, email, userId, pwd, accessLevel) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=createAsStmtFailed");
-        exit();
-    }
-
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "ssssssi", $fName, $lName, $dName, $email, $uid, $hashedPwd, $accessLevel);
-    mysqli_stmt_execute($stmt);
-    session_start();
-    $uidExists = uidExists($conn, $uid);
-    $_SESSION["userId"] = $uidExists["id"];
-    $_SESSION["userUid"] = $uidExists["userId"];
-    $_SESSION["userName"] = $uidExists["displayName"];
-    $_SESSION["accessLevel"] = $uidExists["accessLevel"];
-    header("location: ../dashboard.php?signup=success");
-    mysqli_stmt_close($stmt);
-    exit();
-}
-
-function getStudent($conn, $userId) {
-    $sql = "SELECT * FROM students WHERE userId = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../view.php?id=$userId&error=stmtFailed");
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $userId);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        $result = false;
-        return $result;
-    }
-
-    mysqli_stmt_close($stmt);
-
-}
-
-function getTeacher($conn, $userId) {
-    $sql = "SELECT * FROM staff WHERE userId = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../view.php?id=$userId&error=stmtFailed");
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "s", $userId);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($resultData)) {
-        return $row;
-    } else {
-        $result = false;
-        return $result;
-    }
-
-    mysqli_stmt_close($stmt);
-
+function addEntry($conn, $postId, $uid, $name, $date, $time, $content, $isFile, $ftp, $fileLocation) {
+    $sql = "INSERT INTO `".$postId."` (userId, userName, postDate, postTime, content, file, ftp, fileLocation) VALUES ('$uid', '$name', '$date', '$time', '$content', '$isFile', '$ftp', '$fileLocation')";
+    mysqli_query($conn, $sql);
 }
