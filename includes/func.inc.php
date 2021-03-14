@@ -63,7 +63,7 @@ function approved($row, $cnt) {
                             echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
-                            <td class="reqTable-data status">Approved by '.$actionUserId.'</td>
+                            <td class="reqTable-data status">Approved by '.$actionUserName.'</td>
                         </tr>';
 }
 
@@ -91,7 +91,7 @@ function declined($row, $cnt) {
                             echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
-                            <td class="reqTable-data status">Declined by '.$actionUserId.'</td>
+                            <td class="reqTable-data status">Declined by '.$actionUserName.'</td>
                         </tr>'; 
 }
 
@@ -119,7 +119,7 @@ function more_info($row, $cnt) {
                             echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
-                            <td class="reqTable-data status">More information requested by '.$actionUserId.'</td>
+                            <td class="reqTable-data status">More information requested by '.$actionUserName.'</td>
                         </tr>'; 
 }
 
