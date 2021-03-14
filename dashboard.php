@@ -91,7 +91,7 @@ include("auth_session.php");
                             <label for="filter-type">Request Type</label><br /><br />
                             <select name="filter-type" id="filter-type">
                                 <option value="notSet"> </option>
-                                <option value="late-add-drop">Late add/drop request</option>
+                                <option value="late-add-drop">Late add or drop request</option>
                                 <option value="extend-submission">Extend submission deadline</option>
                                 <option value="repeat-exams">Repeat exams as first attempt with the next batch</option>
                             </select>
@@ -118,7 +118,7 @@ include("auth_session.php");
         <?php
         if(isset($_POST['filter-hidden'])) {
             $status = $_POST['filter-status'];
-            $type = $_POST['filter-type'];
+            $subject = $_POST['filter-type'];
             $index = $_POST['filter-index'];
             $uname = $_POST['filter-uname'];
             $fi_name = $_POST['filter-name'];
@@ -137,7 +137,7 @@ include("auth_session.php");
                         <td class="list-data">'.$status.'
                     </tr>';
             }
-            if($type !== "notSet") {
+            if($subject !== "notSet") {
                 if ($subject === "late-add-drop") {
                     $subject = "Late add or drop request";
                 } elseif ($subject === "extend-submission") {
@@ -145,12 +145,12 @@ include("auth_session.php");
                 } elseif ($subject === "repeat-exams") {
                     $subject = "Repeat exams as first attempt with the next batch";
                 }
-                $sql = $sql." postSubject='$type'";
+                $sql = $sql." postSubject='$subject'";
                 $setStatus = true;
                 echo '
                     <tr>
                         <td class="list-heading">Type</td>
-                        <td class="list-data">'.$type.'
+                        <td class="list-data">'.$subject.'
                     </tr>';
             }
             if(!empty($index)) {
@@ -196,6 +196,7 @@ include("auth_session.php");
             $cnt = 1;
             echo '
                 <div>
+                    <h2>Requests</h2>
                     <table class="reqTable">
                         <tr class="reqTable-heading" >
                             <th class="reqTable-headItem no">No.</th>
