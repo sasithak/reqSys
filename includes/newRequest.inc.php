@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
         
     }
     createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation);
-    //header("Location: ../view.php?id=".$postId);
+    header("Location: ../view.php?id=".$postId);
     exit();
     
     
