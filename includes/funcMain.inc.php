@@ -127,7 +127,7 @@ function head() {
             <tr>
                 <th><a href="dashboard.php">Home</a></th>
                 <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
-                <th><a href="logout.php">Logout</a></th>
+                <th><a href="../logout.php">Logout</a></th>
             </tr>
         </table>
     </header>';

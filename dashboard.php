@@ -27,7 +27,7 @@ include("auth_session.php");
 
     if ($accessLevel === 0) {
         echo '
-            <section id="new"><a href="./newRequest.php"><h3>Add new request</h3></a></section>
+            <section id="new"><a href="../newRequest.php"><h3>Add new request</h3></a></section>
             <section id="requests">
                 <h3>My requests</h3>';
         $sql = "SELECT * FROM discussions WHERE userId = '$userId';";
