@@ -34,7 +34,7 @@
             $_SESSION['indexNo'] = $row['indexNo'];
             $_SESSION['name'] = $row['firstname']." ".$row['lastname'];
             // Redirect to user dashboard page
-            header("Location: dashboard.php/?login=success");
+            header("Location: dashboard.php?login=success");
         } else {
             echo "
                 <div class='form'>
