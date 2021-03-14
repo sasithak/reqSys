@@ -154,7 +154,7 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($index)) {
-                $sql = $sql."userId='$index'";
+                $sql = $sql." userId='$index'";
                 $setStatus = true;
                 echo '
                     <tr>
@@ -163,7 +163,7 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($uname)) {
-                $sql = $sql."userName='$uname'";
+                $sql = $sql." userName='$uname'";
                 $setStatus = true;
                 echo '
                     <tr>
@@ -172,7 +172,7 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($fi_name)) {
-                $sql = $sql."name='$fi_name'";
+                $sql = $sql." userFullName='$fi_name'";
                 $setStatus = true;
                 echo '
                     <tr>
@@ -229,6 +229,8 @@ include("auth_session.php");
                     </table>
                 </div>
             </section>';
+        } else {
+            echo "<h2>No requests</h2>";
         }
     }
 
