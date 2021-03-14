@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
     if ($subject === "notSet") {
         header("location: ../newRequest.php?incomplete=true");
     } elseif ($subject === "late-add-drop") {
-        $subject = "Late add/drop request";
+        $subject = "Late add or drop request";
     } elseif ($subject === "extend-submission") {
         $subject = "Extend submission deadline";
     } elseif ($subject === "repeat-exams") {
@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
         
     }
     createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation);
-    header("Location: ../view.php?id=".$postId);
+    //header("Location: ../view.php?id=".$postId);
     exit();
     
     

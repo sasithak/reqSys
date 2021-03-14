@@ -15,7 +15,7 @@ function head() {
     </header>';
 }
 
-function pending($row) {
+function pending($row, $cnt) {
     $postId = $row["postId"];
     $createdUser = $row["userName"];
     $createdUserId = $row["userId"];
@@ -35,7 +35,7 @@ function pending($row) {
                         </tr>';
 }
 
-function approved($row) {
+function approved($row, $cnt) {
     $postId = $row["postId"];
     $createdUser = $row["userName"];
     $createdUserId = $row["userId"];
@@ -58,7 +58,7 @@ function approved($row) {
                         </tr>';
 }
 
-function declined($row) {
+function declined($row, $cnt) {
     $postId = $row["postId"];
     $createdUser = $row["userName"];
     $createdUserId = $row["userId"];
@@ -81,7 +81,7 @@ function declined($row) {
                         </tr>'; 
 }
 
-function more_info($row) {
+function more_info($row, $cnt) {
     $postId = $row["postId"];
     $createdUser = $row["userName"];
     $createdUserId = $row["userId"];
@@ -105,7 +105,7 @@ function more_info($row) {
 }
 
 function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation) {
-    $sql = "INSERT INTO discussions (postId, userId, userName, userFullName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$userName, '$name', '$date', '$time', '$subject', '$status');";
+    $sql = "INSERT INTO discussions (postId, userId, userName, userFullName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$userName', '$name', '$date', '$time', '$subject', '$status');";
     if (mysqli_query($conn, $sql)) {
         $sql2 = "CREATE TABLE `".$postId."` (
             id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -127,7 +127,7 @@ function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $su
             header("Location: ../newRequest?error=dbError"."-".mysqli_error($conn));
         }
     } else {
-        header("Location: ../newRequest?error=dbError"."-".mysqli_error($conn));
+        header("Location: ../newRequest.php?error=dbError"."-".mysqli_error($conn));
     }
 }
 

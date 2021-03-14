@@ -49,17 +49,17 @@ include("auth_session.php");
                 $status = $row["currStatus"];
 
                 if ($status === "pending"){
-                    pending($row);
+                    pending($row, $cnt);
                 } else {
                     $arr = explode("-", $status);
                     $action = $arr[0];
 
                     if ($action === "approved") {
-                        approved($row) ;                      
+                        approved($row, $cnt) ;                      
                     } elseif ($action === "declined") {
-                        declined($row);                     
+                        declined($row, $cnt);                     
                     } elseif ($action === "moreInfo") {
-                        more_info($row);                       
+                        more_info($row, $cnt);                       
                     }
                 }
                 $cnt += 1;                
@@ -91,6 +91,9 @@ include("auth_session.php");
                             <label for="filter-type">Request Type</label><br /><br />
                             <select name="filter-type" id="filter-type">
                                 <option value="notSet"> </option>
+                                <option value="late-add-drop">Late add/drop request</option>
+                                <option value="extend-submission">Extend submission deadline</option>
+                                <option value="repeat-exams">Repeat exams as first attempt with the next batch</option>
                             </select>
                         </td>
                         <td class="filter-item">
@@ -135,6 +138,13 @@ include("auth_session.php");
                     </tr>';
             }
             if($type !== "notSet") {
+                if ($subject === "late-add-drop") {
+                    $subject = "Late add or drop request";
+                } elseif ($subject === "extend-submission") {
+                    $subject = "Extend submission deadline";
+                } elseif ($subject === "repeat-exams") {
+                    $subject = "Repeat exams as first attempt with the next batch";
+                }
                 $sql = $sql." postSubject='$type'";
                 $setStatus = true;
                 echo '
@@ -199,17 +209,17 @@ include("auth_session.php");
                 $status = $row["currStatus"];
 
                 if ($status === "pending") {
-                    pending($row);
+                    pending($row, $cnt);
                 } else {
                     $arr = explode("-", $status);
                     $action = $arr[0];
 
                     if ($action === "approved") {
-                        approved($row) ;                      
+                        approved($row, $cnt) ;                      
                     } elseif ($action === "declined") {
-                        declined($row);                     
+                        declined($row, $cnt);                     
                     } elseif ($action === "moreInfo") {
-                        more_info($row);
+                        more_info($row, $cnt);
                     }
                 }
                 $cnt += 1;                
