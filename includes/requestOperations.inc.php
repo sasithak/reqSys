@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-$uid = $_SESSION["userUid"];
-$name = $_SESSION["userName"];
+$uid = $_SESSION["indexNo"];
+$name = $_SESSION["name"];
 
-include_once 'dbh.inc.php';
+include_once '../db.php';
 
 if(isset($_POST["submit"])) {
     $action = $_POST["operation"];
