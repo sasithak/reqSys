@@ -1,10 +1,11 @@
 <?php
     include_once 'auth_session.php';
-    include_once './includes/funcMain.inc.php';
+    include_once './includes/func.inc.php';
     include_once './db.php';
 
-    $userId = $_SESSION["userUid"];
-    $userName = $_SESSION["userName"];
+    $userId = $_SESSION["indexNo"];
+    $name = $_SESSION["name"];
+    $username = $_SESSION["username"];
     $accessLevel = $_SESSION["accessLevel"];
 
     $postId = $_GET["id"];
@@ -16,6 +17,7 @@
     $postUid = end($string);
     if ($accessLevel === 0 and $userId != $postUid) {
         header("Location: dashboard.php?access=unauthorized");
+        exit();
     }
 
     $sql = "SELECT * FROM discussions WHERE postId = '$postId';";
@@ -24,7 +26,7 @@
     $subject = $result["postSubject"];
     $status = $result["currStatus"];
     $canReply = true;
-    $createdBy = $result["userName"];
+    $createdBy = $result["userFullName"];
     $createdDate = $result["createdDate"];
     $createdTime = $result["createdTime"];
 
@@ -82,7 +84,7 @@
     if ($result and mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        $name = $row["userName"];
+        $name = $row["userFullName"];
         $userId = $row["userId"];
         $postDate = $row["postDate"];
         $postTime = $row["postTime"];
@@ -98,7 +100,9 @@
             <section class="postBody">
                 <div class="content">
                     <p>'.$content.'</p>
-                </div>';
+                </div>
+                <div class = "attachments">
+                    <h3>Attachments</h3>';
         if ($file === "yes") {
             if ($ftp === "img"){
                 echo '
@@ -108,7 +112,9 @@
             } else {
                 echo '
                     <div class="others">
+                        <ul><li>
                         <p><a href='.$fileLocation.' target="_blank">Attachment</a>
+                        </li></ul>
                     </div>
                 </section>';
             }
@@ -134,7 +140,7 @@
     } elseif ($canReply) {
         echo '
             <section id=replyButton>
-                <a href="./view.php?id='.$postId.'&reply=enabled"><button type="submit" name=submit>Reply</button></a>
+                <a href="./view.php?id='.$postId.'?reply=enabled"><button type="submit" name=submit>Reply</button></a>
             </section>';
     }
 
