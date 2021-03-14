@@ -18,11 +18,12 @@ include("auth_session.php");
     head();
     
     $userId = $_SESSION["indexNo"];
-    $userName = $_SESSION["username"];
+    $username = $_SESSION["username"];
     $accessLevel = $_SESSION["accessLevel"];
+    $name = $_SESSION["name"];
 
     if (isset($_GET["login"])) {
-        echo "<h3>Welcome $userName</h3>";
+        echo "<h3>Welcome $name</h3>";
     }
 
     if ($accessLevel === 0) {
