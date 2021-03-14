@@ -17,7 +17,7 @@ function head() {
 
 function pending($row, $cnt) {
     $postId = $row["postId"];
-    $createdUser = $row["userName"];
+    $createdUser = $row["userFullName"];
     $createdUserId = $row["userId"];
     $postDate = $row["createdDate"];
     $postTime = $row["createdTime"];
@@ -27,8 +27,12 @@ function pending($row, $cnt) {
     echo '
                         <tr class="reqTable-pending">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td class="reqTable-data user">'.$createdUser.'</td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>';
+                            if($createdUserId !== $_SESSION["indexNo"]) {
+                                echo '
+                            <td class="reqTable-data user"><a href="./profile.php?id='.$createdUserId.'">'.$createdUser.'</td>';
+                            }
+                            echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">Pending</td>
@@ -37,7 +41,7 @@ function pending($row, $cnt) {
 
 function approved($row, $cnt) {
     $postId = $row["postId"];
-    $createdUser = $row["userName"];
+    $createdUser = $row["userFullName"];
     $createdUserId = $row["userId"];
     $postDate = $row["createdDate"];
     $postTime = $row["createdTime"];
@@ -51,7 +55,12 @@ function approved($row, $cnt) {
     echo '
                         <tr class="reqTable-approved">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>';
+                            if($createdUserId !== $_SESSION["indexNo"]) {
+                                echo '
+                            <td class="reqTable-data user"><a href="./profile.php?id='.$createdUserId.'">'.$createdUser.'</td>';
+                            }
+                            echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">Approved by '.$actionUserId.'</td>
@@ -60,7 +69,7 @@ function approved($row, $cnt) {
 
 function declined($row, $cnt) {
     $postId = $row["postId"];
-    $createdUser = $row["userName"];
+    $createdUser = $row["userFullName"];
     $createdUserId = $row["userId"];
     $postDate = $row["createdDate"];
     $postTime = $row["createdTime"];
@@ -74,7 +83,12 @@ function declined($row, $cnt) {
     echo '
                         <tr class="reqTable-declined">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>';
+                            if($createdUserId !== $_SESSION["indexNo"]) {
+                                echo '
+                            <td class="reqTable-data user"><a href="./profile.php?id='.$createdUserId.'">'.$createdUser.'</td>';
+                            }
+                            echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">Declined by '.$actionUserId.'</td>
@@ -83,7 +97,7 @@ function declined($row, $cnt) {
 
 function more_info($row, $cnt) {
     $postId = $row["postId"];
-    $createdUser = $row["userName"];
+    $createdUser = $row["userFullName"];
     $createdUserId = $row["userId"];
     $postDate = $row["createdDate"];
     $postTime = $row["createdTime"];
@@ -97,7 +111,12 @@ function more_info($row, $cnt) {
     echo '
                         <tr class="reqTable-moreInfo">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>';
+                            if($createdUserId !== $_SESSION["indexNo"]) {
+                                echo '
+                            <td class="reqTable-data user"><a href="./profile.php?id='.$createdUserId.'">'.$createdUser.'</td>';
+                            }
+                            echo'
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">More information requested by '.$actionUserId.'</td>
