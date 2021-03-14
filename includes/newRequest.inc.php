@@ -24,6 +24,7 @@ if (isset($_POST["submit"])) {
 
     if ($subject === "notSet") {
         header("location: ../newRequest.php?incomplete=true");
+        exit();
     } elseif ($subject === "late-add-drop") {
         $subject = "Late add or drop request";
     } elseif ($subject === "extend-submission") {
@@ -34,6 +35,7 @@ if (isset($_POST["submit"])) {
 
     if (empty($content)) {
         header("location: ../newRequest.php?incomplete=true");
+        exit();
     }
 
     if (isset($_FILES['file'])) {
