@@ -189,7 +189,7 @@ include("auth_session.php");
                 $sql = "SELECT * FROM discussions;";
             }
         } else {
-            $sql = "SELECT * FROM discussions;";
+            $sql = "SELECT * FROM discussions WHERE currStatus='pending' OR currStatus LIKE '%more%';";
         }
         $results = mysqli_query($conn, $sql);
         if ($results and mysqli_num_rows($results) > 0) {
