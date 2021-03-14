@@ -29,6 +29,7 @@
     $createdBy = $result["userFullName"];
     $createdDate = $result["createdDate"];
     $createdTime = $result["createdTime"];
+    $createdIndex = $result["userId"];
 
     if ($status === "pending") {
         $action = "pending";
@@ -51,9 +52,9 @@
 
     echo '
         <section class="topic">
-            <span class="subject"><h1>'.$subject.'</h1></span>
-            <h2><span class="name">Created by '.$createdBy.'</span> <span class="datetime">'.$createdDate.' '.$createdTime.'</span></h2>
-            <h2><span class="name">Status: ';
+            <h1 class="subject">'.$subject.'</h1>
+            <h2 class="name">Created by <a href="./profile.php?id='.$createdIndex.'">'.$createdBy.'</a> <span class="datetime">'.$createdDate.' '.$createdTime.'</h2></span>
+            <h2 class="name">Status: ';
             if ($status === "pending") {
                 echo '<span class="pending">Pending</span>';
             } else {
@@ -71,7 +72,7 @@
                 } elseif ($action == "moreInfo") {
                     echo '<span class="pending">Pending - More Info requested </span>';
                 }
-                echo '<span>by '.$actionUserName.'</span>';
+                echo '<span>by <a href="./profile.php?id='.$actionUserId.'">'.$actionUserName.'</a></h2>';
             }
             echo '
             </h2>
@@ -84,8 +85,8 @@
     if ($result and mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        $name = $row["userFullName"];
-        $userId = $row["userId"];
+        $postUsername = $row["userFullName"];
+        $postUserId = $row["userId"];
         $postDate = $row["postDate"];
         $postTime = $row["postTime"];
         $content = $row["content"];
@@ -95,14 +96,14 @@
 
         echo '
             <section class="heading">
-                <h3><span class="name">'.$name.'</span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
+                <h3><span class="name"><a href="./profile.php?id='.$postUserId.'">'.$postUsername.'</a></span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
             </section>
             <section class="postBody">
                 <div class="content">
                     <p>'.$content.'</p>
                 </div>
                 <div class = "attachments">
-                    <h3>Attachments</h3>';
+                    <h4>Attachments</h4>';
         if ($file === "yes") {
             if ($ftp === "img"){
                 echo '
@@ -129,6 +130,7 @@
         if ($reply === "enabled") {
             echo '
                 <section class="requesting">
+                    <h2 class=name>New Reply</h2>
                     <form action="./includes/newReply.inc.php" method="post" class="new" enctype="multipart/form-data">
                         <textarea name="content" id="content" placeholder="Content"></textarea>
                         <br /><br />
@@ -143,7 +145,7 @@
         echo '
             <br />
             <section id=replyButton>
-                <a href="./view.php?id='.$postId.'?reply=enabled"><button type="submit" name=submit>Reply</button></a>
+                <a href="./view.php?id='.$postId.'&reply=enabled"><button type="submit" name=submit>Reply</button></a>
             </section>';
     }
 
