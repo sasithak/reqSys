@@ -1,5 +1,5 @@
 <?php
-    include_once 'header.php';
+    include_once './auth_session.php';
     $accessLevel = $_SESSION["accessLevel"];
     if($accessLevel === 1) {
         header("Location: dashboard.php");
@@ -16,7 +16,7 @@
 </head>
 <body>
     <?php
-        include_once './includes/funcMain.inc.php';
+        include_once './includes/func.inc.php';
         head();
     ?>
 
@@ -24,14 +24,27 @@
 
     <section class="requesting">
         <form action="./includes/newRequest.inc.php" method="post" class="new" enctype="multipart/form-data">
-            <input type="text" name="subject" placeholder="Subject">
+            <label for="subject">Request Type: </label>
+            <select name="subject" id="subject">
+                <option value="notSet"> </option>
+                <option value="late-add-drop">Late add/drop request</option>
+                <option value="extend-submission">Extend submission deadline</option>
+                <option value="repeat-exams">Repeat exams as first attempt with the next batch</option>
+            </select>
             <br /><br />
             <textarea name="content" id="content" placeholder="Content"></textarea>
             <br /><br />
             <input type="file" name="file">
             <br /><br />
-            <button type="submit" name=submit>Post</button>
+            <button type="submit" name="submit">Post</button>
         </form>
+        <?php
+            if (isset($_GET["incomplete"])) {
+                if ($_GET["incomplete"] === "true") {
+                    echo '<h3>Request type and Description are compulsory</h3>';
+                }
+            }
+        ?>
     </section>
 
 </body>

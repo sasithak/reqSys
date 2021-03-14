@@ -104,22 +104,23 @@ function more_info($row) {
                         </tr>'; 
 }
 
-function createRequest($conn, $postId, $uid, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation) {
-    $sql = "INSERT INTO discussions (postId, userId, userName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$name', '$date', '$time', '$subject', '$status');";
+function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation) {
+    $sql = "INSERT INTO discussions (postId, userId, userName, userFullName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$userName, '$name', '$date', '$time', '$subject', '$status');";
     if (mysqli_query($conn, $sql)) {
         $sql2 = "CREATE TABLE `".$postId."` (
             id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-            userId varchar(10) NOT NULL,
-            userName varchar(50) NOT NULL,
-            postDate varchar(20) NOT NULL,
-            postTime varchar(20) NOT NULL,
+            userId varchar(16) NOT NULL,
+            userName varchar(32) NOT NULL,
+            userFullName varchar(64) NOT NULL,
+            postDate varchar(32) NOT NULL,
+            postTime varchar(32) NOT NULL,
             content varchar(3000) NOT NULL,
-            file varchar(10) NOT NULL,
-            ftp varchar(10) NOT NULL,
+            file varchar(16) NOT NULL,
+            ftp varchar(16) NOT NULL,
             fileLocation varchar(256) NOT NULL
         );";
         if (mysqli_query($conn, $sql2)) {
-            addEntry($conn, $postId, $uid, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
+            addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
         } else {
             $sql3 = "DELETE FROM discussions WHERE postId = ".$postId.";";
             mysqli_query($conn, $sql3);
@@ -130,7 +131,7 @@ function createRequest($conn, $postId, $uid, $name, $date, $time, $subject, $con
     }
 }
 
-function addEntry($conn, $postId, $uid, $name, $date, $time, $content, $isFile, $ftp, $fileLocation) {
-    $sql = "INSERT INTO `".$postId."` (userId, userName, postDate, postTime, content, file, ftp, fileLocation) VALUES ('$uid', '$name', '$date', '$time', '$content', '$isFile', '$ftp', '$fileLocation')";
+function addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content, $isFile, $ftp, $fileLocation) {
+    $sql = "INSERT INTO `".$postId."` (userId, userName, userFullName, postDate, postTime, content, file, ftp, fileLocation) VALUES ('$uid', '$userName', '$name', '$date', '$time', '$content', '$isFile', '$ftp', '$fileLocation')";
     mysqli_query($conn, $sql);
 }

@@ -1,11 +1,12 @@
 <?php
 session_start();
-$uid = $_SESSION["userUid"];
-$name = $_SESSION["userName"];
+$uid = $_SESSION["indexNo"];
+$name = $_SESSION["name"];
 $accessLevel = $_SESSION["accessLevel"];
+$userName = $_SESSION["username"];
 
-include_once 'dbh.inc.php';
-include_once 'funcMain.inc.php';
+include_once '../db.php';
+include_once 'func.inc.php';
 
 if (isset($_POST["submit"])) {
     $subject = $_POST["subject"];
@@ -20,6 +21,20 @@ if (isset($_POST["submit"])) {
     $isFile = "no";
     $ftp = "no";
     $fileLocation = "./discussions/uploads/".$postId;
+
+    if ($subject === "notSet") {
+        header("location: ../newRequest.php?incomplete=true");
+    } elseif ($subject === "late-add-drop") {
+        $subject = "Late add/drop request";
+    } elseif ($subject === "extend-submission") {
+        $subject = "Extend submission deadline";
+    } elseif ($subject === "repeat-exams") {
+        $subject = "Repeat exams as first attempt with the next batch";
+    }
+
+    if (empty($content)) {
+        header("location: ../newRequest.php?incomplete=true");
+    }
 
     if (isset($_FILES['file'])) {
         $file = $_FILES["file"];
@@ -47,7 +62,7 @@ if (isset($_POST["submit"])) {
         }
         
     }
-    createRequest($conn, $postId, $uid, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation);
+    createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation);
     header("Location: ../view.php?id=".$postId);
     exit();
     
