@@ -1,11 +1,12 @@
 <?php
 session_start();
-$uid = $_SESSION["userUid"];
-$name = $_SESSION["userName"];
+$uid = $_SESSION["indexNo"];
+$name = $_SESSION["name"];
+$userName = $_SESSION["username"];
 $accessLevel = $_SESSION["accessLevel"];
 
-include_once 'dbh.inc.php';
-include_once 'funcMain.inc.php';
+include_once '../db.php';
+include_once 'func.inc.php';
 
 
 if (isset($_POST["submit"])) {
@@ -47,7 +48,7 @@ if (isset($_POST["submit"])) {
 
         
     }
-    addEntry($conn, $postId, $uid, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
+    addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
     header("Location: ../view.php?id=".$postId);
     exit();
     
