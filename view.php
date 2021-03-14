@@ -118,10 +118,12 @@
                     </div>
                 </section>';
             }
-                    }
+        } else {
+            echo '<span id="noAttachments">No attachments</span>';
+        }
     }
     }
-
+    echo '<br />';
     if (isset($_GET["reply"])) {
         $reply = $_GET["reply"];
         if ($reply === "enabled") {
@@ -139,6 +141,7 @@
         }
     } elseif ($canReply) {
         echo '
+            <br />
             <section id=replyButton>
                 <a href="./view.php?id='.$postId.'?reply=enabled"><button type="submit" name=submit>Reply</button></a>
             </section>';
@@ -146,7 +149,9 @@
 
     if ($accessLevel === 1 and $canReply) {
         echo '
+        <br />
         <section class="operations">
+            <h2>Actions</h2>
             <form action="includes/requestOperations.inc.php" method="post">
                 <select name="operation" id="operation">
                     <option value="error"> </option>
