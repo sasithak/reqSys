@@ -12,6 +12,7 @@ if(isset($_POST["submit"])) {
 
     if ($action === "error") {
         header("Location: ../view.php?id=".$postId);
+        exit();
     }
 
     $status = $action."-".$uid."-".$name;
