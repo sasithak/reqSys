@@ -13,7 +13,7 @@ include("auth_session.php");
 </head>
 <body>
     <?php
-    include_once './includes/funcMain.inc.php';
+    include_once './includes/func.inc.php';
     include_once './db.php';
     head();
     
@@ -38,62 +38,28 @@ include("auth_session.php");
             echo '
                 <div>
                     <table class="reqTable">
-                        <tr class="tableHead" >
-                            <th id="no">No.</th>
-                            <th id="sub">Subject</th>
-                            <th id="dt">Created Date</th>
-                            <th id="tm">Created Time</th>
-                            <th id="sts">Status</th>
+                        <tr class="reqTable-heading" >
+                            <th class="reqTable-headItem no">No.</th>
+                            <th class="reqTable-headItem subject">Subject</th>
+                            <th class="reqTable-headItem date">Created Date</th>
+                            <th class="reqTable-headItem time">Created Time</th>
+                            <th class="reqTable-headItem status">Status</th>
                         </tr>';
             while($row = mysqli_fetch_assoc($results)) {
-                $postDate = $row["createdDate"];
-                $postTime = $row["createdTime"];
                 $status = $row["currStatus"];
-                $subject = $row["postSubject"];
-                $postId = $row["postId"];
 
                 if ($status === "pending"){
-                    echo '
-                        <tr class="pending">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">Pending</td>
-                        </tr>';
+                    pending($row);
                 } else {
                     $arr = explode("-", $status);
                     $action = $arr[0];
-                    $actionUserName = $arr[1];
-                    $actionUserId = $arr[2];
 
                     if ($action === "approved") {
-                        echo '
-                        <tr class="approved">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">Approved by '.$actionUserId.'</td>
-                        </tr>';                        
+                        approved($row) ;                      
                     } elseif ($action === "declined") {
-                        echo '
-                        <tr class="declined">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">Declined by '.$actionUserId.'</td>
-                        </tr>';                        
+                        declined($row);                     
                     } elseif ($action === "moreInfo") {
-                        echo '
-                        <tr class="moreInfo">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">More information requested by '.$actionUserId.'</td>
-                        </tr>';                        
+                        more_info($row);                       
                     }
                 }
                 $cnt += 1;                
@@ -106,56 +72,144 @@ include("auth_session.php");
             echo '<div><h3>No posts to display</h3></div>';
         }
     } elseif ($accessLevel === 1) {
-        $sql = "SELECT * FROM discussions;";
+        ?>
+        <div class="filters">
+            <h2>Filters</h2>
+            <form method="post" action="./dashboard.php" class="filter">
+                <table class="filter-table">
+                    <tr class="filter-row">
+                        <td class="filter-item">
+                            <label for="filter-status">Status</label><br /><br />
+                            <select name="filter-status" id="filter-status">
+                                <option value="notSet"> </option>
+                                <option value="approved">approved</option>
+                                <option value="declined">declined</option>
+                                <option value="pending">pending</option>
+                            </select>
+                        </td>
+                        <td class="filter-item">
+                            <label for="filter-type">Request Type</label><br /><br />
+                            <select name="filter-type" id="filter-type">
+                                <option value="notSet"> </option>
+                            </select>
+                        </td>
+                        <td class="filter-item">
+                            <label for="filter-index">Index No.</label><br /><br />
+                            <input type="text" name="filter-index" id="filter-index">
+                        </td>
+                        <td class="filter-item">
+                            <label for="filter-uname">Student Username</label><br /><br />
+                            <input type="text" name="filter-uname" id="filter-uname">
+                        </td>
+                        <td class="filter-item">
+                            <label for="filter-name">Student Name</label><br /><br />
+                            <input type="text" name="filter-name" id="filter-name">
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="filter-hidden" value="set">
+                <br />
+                <button class="filter-button">Filter</button>
+            </form>
+        </div>
+        <?php
+        if(isset($_POST['filter-hidden'])) {
+            $status = $_POST['filter-status'];
+            $type = $_POST['filter-type'];
+            $index = $_POST['filter-index'];
+            $uname = $_POST['filter-uname'];
+            $fi_name = $_POST['filter-name'];
+            $sql = "WHERE";
+            $setStatus = false;
+            echo '
+            <div class="list">
+                <h2>Applied Filters</h2>
+                <table class="list-table">';
+            if($status !== "notSet") {
+                $sql = $sql." status='$status'";
+                $setStatus = true;
+                echo '
+                    <tr>
+                        <td class="list-heading">Status</td>
+                        <td class="list-data">'.$status.'
+                    </tr>';
+            }
+            if($type !== "notSet") {
+                $sql = $sql." postSubject='$type'";
+                $setStatus = true;
+                echo '
+                    <tr>
+                        <td class="list-heading">Type</td>
+                        <td class="list-data">'.$type.'
+                    </tr>';
+            }
+            if(!empty($index)) {
+                $sql = $sql."userId='$index'";
+                $setStatus = true;
+                echo '
+                    <tr>
+                        <td class="list-heading">Index No.</td>
+                        <td class="list-data">'.$index.'
+                    </tr>';
+            }
+            if(!empty($uname)) {
+                $sql = $sql."userName='$uname'";
+                $setStatus = true;
+                echo '
+                    <tr>
+                        <td class="list-heading">User Name</td>
+                        <td class="list-data">'.$uname.'
+                    </tr>';
+            }
+            if(!empty($fi_name)) {
+                $sql = $sql."name='$fi_name'";
+                $setStatus = true;
+                echo '
+                    <tr>
+                        <td class="list-heading">Name</td>
+                        <td class="list-data">'.$fi_name.'
+                    </tr>';
+            }
+            echo '</table>';
+            if ($setStatus) {
+                $sql = "SELECT * FROM discussions ".$sql.";";
+                echo '<br /><a href="./dashboard.php"><button class="filter-button">Reset</button></a>';
+            } else {
+                echo "<h3>No filters applied</h3>";
+                $sql = "SELECT * FROM discussions;";
+            }
+        } else {
+            $sql = "SELECT * FROM discussions;";
+        }
         $results = mysqli_query($conn, $sql);
         if ($results and mysqli_num_rows($results) > 0) {
             $cnt = 1;
             echo '
                 <div>
                     <table class="reqTable">
-                        <tr class="tableHead" >
-                            <th id="no">No.</th>
-                            <th id="sub">Subject</th>
-                            <th id="sub">Created User</th>
-                            <th id="dt">Created Date</th>
-                            <th id="tm">Created Time</th>
-                            <th id="sts">Status</th>
+                        <tr class="reqTable-heading" >
+                            <th class="reqTable-headItem no">No.</th>
+                            <th class="reqTable-headItem subject">Subject</th>
+                            <th class="reqTable-headItem user">Created User</th>
+                            <th class="reqTable-headItem date">Created Date</th>
+                            <th class="reqTable-headItem time">Created Time</th>
+                            <th class="reqTable-headItem status">Status</th>
                         </tr>';
             while($row = mysqli_fetch_assoc($results)) {
-                $postId = $row["postId"];
-                $createdUser = $row["userName"];
-                $createdUserId = $row["userId"];
-                $postDate = $row["createdDate"];
-                $postTime = $row["createdTime"];
                 $status = $row["currStatus"];
-                $subject = $row["postSubject"];
 
-                if ($status === "pending"){
-                    echo '
-                        <tr class="pending">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="usr">'.$createdUser.'</td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">Pending</td>
-                        </tr>';
+                if ($status === "pending") {
+                    pending($row);
                 } else {
                     $arr = explode("-", $status);
                     $action = $arr[0];
-                    $actionUserName = $arr[2];
-                    $actionUserId = $arr[1];
 
-                    if ($action === "moreInfo") {
-                        echo '
-                        <tr class="moreInfo">
-                            <td id="no">'.$cnt.'</td>
-                            <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                            <td id="usr">'.$createdUser.'</td>
-                            <td id="dt">'.$postDate.'</td>
-                            <td id="tm">'.$postTime.'</td>
-                            <td id="sts">More information requested by '.$actionUserName.'</td>
-                        </tr>';                        
+                    if ($action === "approved") {
+                        approved($row) ;                      
+                    } elseif ($action === "declined") {
+                        declined($row);                     
+                    } elseif ($action === "moreInfo") {
+                        more_info($row);
                     }
                 }
                 $cnt += 1;                
