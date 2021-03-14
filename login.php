@@ -9,6 +9,7 @@
 <?php
     require('db.php');
     session_start();
+    
     // When form submitted, check and create user session.
     if (isset($_POST['username'])) {
         $username = stripslashes($_REQUEST['username']);    // removes backslashes
@@ -52,6 +53,14 @@
         <input type="submit" value="Login" name="Log in" class="login-button"/>
 	<p>Not a member?</p>
         <p class="link">Click here to <a href="registration.php">Register.</a></p>
+    <?php
+    if (isset($_GET['logout'])) {
+        if ($_GET['logout'] === "success") {
+            echo '
+                <h3 class="logout-success">You have successfully logged out.</h3><br/>';
+        }
+    }
+    ?>
     </form>
 
 <?php

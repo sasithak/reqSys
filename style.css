@@ -23,7 +23,7 @@ h1.login-title {
     width: calc(100% - 23px);
 }
 .login-input:focus {
-    border-color:#6e8095;
+    border-color: #6e8095;
     outline: none;
 }
 .login-button {
@@ -49,4 +49,7 @@ h1.login-title {
 h3 {
     font-weight: normal;
     text-align: center;
+}
+h3.logout-success {
+    color: red;
 }
