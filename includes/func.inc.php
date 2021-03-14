@@ -27,7 +27,7 @@ function pending($row, $cnt) {
     echo '
                         <tr class="reqTable-pending">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
                             <td class="reqTable-data user">'.$createdUser.'</td>
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
@@ -51,7 +51,7 @@ function approved($row, $cnt) {
     echo '
                         <tr class="reqTable-approved">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">Approved by '.$actionUserId.'</td>
@@ -74,7 +74,7 @@ function declined($row, $cnt) {
     echo '
                         <tr class="reqTable-declined">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">Declined by '.$actionUserId.'</td>
@@ -97,7 +97,7 @@ function more_info($row, $cnt) {
     echo '
                         <tr class="reqTable-moreInfo">
                             <td class="reqTable-data no">'.$cnt.'</td>
-                            <td class="reqTable-data subject"><a href="./view.php?id='.$postId.'">'.$subject.'</a></td>
+                            <td class="reqTable-data subject"><a href="../view.php?id='.$postId.'">'.$subject.'</a></td>
                             <td class="reqTable-data date">'.$postDate.'</td>
                             <td class="reqTable-data time">'.$postTime.'</td>
                             <td class="reqTable-data status">More information requested by '.$actionUserId.'</td>
@@ -125,9 +125,11 @@ function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $su
             $sql3 = "DELETE FROM discussions WHERE postId = ".$postId.";";
             mysqli_query($conn, $sql3);
             header("Location: ../newRequest?error=dbError"."-".mysqli_error($conn));
+            exit();
         }
     } else {
         header("Location: ../newRequest.php?error=dbError"."-".mysqli_error($conn));
+        exit();
     }
 }
 
