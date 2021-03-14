@@ -1,10 +1,11 @@
 <?php
 include_once 'auth_session.php';
 include_once './db.php';
-include_once './includes/funcMain.inc.php';
+include_once './includes/func.inc.php';
 
-$userId = $_SESSION["userUid"];
-$userName = $_SESSION["userName"];
+$userId = $_SESSION["indexNo"];
+$name = $_SESSION["name"];
+$userName = $_SESSION["username"];
 $accessLevel = $_SESSION["accessLevel"];
 
 if (isset($_GET['id'])){
@@ -21,32 +22,28 @@ if (isset($_GET['id'])){
     if ($accessLevel === 0) {
         if ($viewId === $userId) {
             $userData = getUser($conn, $viewId);
-            
-            echo $userData["displayName"].'
+            $displayName = $userData["firstname"]." ".$userData["lastname"];
+            echo $displayName.'
     </title>
     <body>';
             head();
             echo '
         </br>
-        <section><h1>'.$userData["displayName"].'</h1></section>
+        <section><h1>'.$displayName.'</h1></section>
         
         <section class="userData">
             <table style="text-align:left">
                 <tr>
                     <th>Index No</th>
-                    <td>'.$userData["userId"].'</td>
-                </tr>
-                <tr>
-                    <th>Display Name</th>
-                    <td>'.$userData["displayName"].'</td>
+                    <td>'.$userData["indexNo"].'</td>
                 </tr>
                 <tr>
                     <th>First Name</th>
-                    <td>'.$userData["firstName"].'</td>
+                    <td>'.$userData["firstname"].'</td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
-                    <td>'.$userData["lastName"].'</td>
+                    <td>'.$userData["lastname"].'</td>
                 </tr>
                 <tr>
                     <th>Email</th>
@@ -61,31 +58,28 @@ if (isset($_GET['id'])){
 
     } else {
         $userData = getUser($conn, $viewId);
-        echo $userData["displayName"].'
+        $displayName = $userData["firstname"]." ".$userData["lastname"];
+        echo $displayName.'
     </title>
     <body>';
             head();
             echo '
         </br>
-        <section><h1>'.$userData["displayName"].'</h1></section>
+        <section><h1>'.$displayName.'</h1></section>
         
         <section class="userData">
             <table style="text-align:left">
                 <tr>
                     <th>Index No</th>
-                    <td>'.$userData["userId"].'</td>
-                </tr>
-                <tr>
-                    <th>Display Name</th>
-                    <td>'.$userData["displayName"].'</td>
+                    <td>'.$userData["indexNo"].'</td>
                 </tr>
                 <tr>
                     <th>First Name</th>
-                    <td>'.$userData["firstName"].'</td>
+                    <td>'.$userData["firstname"].'</td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
-                    <td>'.$userData["lastName"].'</td>
+                    <td>'.$userData["lastname"].'</td>
                 </tr>
                 <tr>
                     <th>Email</th>
@@ -93,10 +87,10 @@ if (isset($_GET['id'])){
                 </tr>
             </table>
         </section>';
-        if ($userData["accessLevel"] === 0) {
+        if ($userData["acc_type"] === "students") {
             echo '
             <section id="requests">
-                <h3>Requests by '.$userData["displayName"].'</h3>';
+                <h3>Requests by '.$displayName.'</h3>';
             $sql = "SELECT * FROM discussions WHERE userId = '$viewId';";
             $results = mysqli_query($conn, $sql);
             if ($results and mysqli_num_rows($results) > 0) {
@@ -104,62 +98,28 @@ if (isset($_GET['id'])){
                 echo '
                     <div>
                         <table class="reqTable">
-                            <tr class="tableHead" >
-                                <th id="no">No.</th>
-                                <th id="sub">Subject</th>
-                                <th id="dt">Created Date</th>
-                                <th id="tm">Created Time</th>
-                                <th id="sts">Status</th>
+                            <tr class="reqTable-heading" >
+                                <th class="reqTable-headItem no">No.</th>
+                                <th class="reqTable-headItem subject">Subject</th>
+                                <th class="reqTable-headItem date">Created Date</th>
+                                <th class="reqTable-headItem time">Created Time</th>
+                                <th class="reqTable-headItem status">Status</th>
                             </tr>';
                 while($row = mysqli_fetch_assoc($results)) {
-                    $postDate = $row["createdDate"];
-                    $postTime = $row["createdTime"];
                     $status = $row["currStatus"];
-                    $subject = $row["postSubject"];
-                    $postId = $row["postId"];
 
                     if ($status === "pending"){
-                        echo '
-                            <tr class="pending">
-                                <td id="no">'.$cnt.'</td>
-                                <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                                <td id="dt">'.$postDate.'</td>
-                                <td id="tm">'.$postTime.'</td>
-                                <td id="sts">Pending</td>
-                            </tr>';
+                        pending($row, $cnt);
                     } else {
                         $arr = explode("-", $status);
                         $action = $arr[0];
-                        $actionUserName = $arr[1];
-                        $actionUserId = $arr[2];
 
                         if ($action === "approved") {
-                            echo '
-                            <tr class="approved">
-                                <td id="no">'.$cnt.'</td>
-                                <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                                <td id="dt">'.$postDate.'</td>
-                                <td id="tm">'.$postTime.'</td>
-                                <td id="sts">Approved by <a href="profile.php?id='.$actionUserName.'">'.$actionUserId.'</td>
-                            </tr>';                        
+                            approved($row, $cnt) ;                      
                         } elseif ($action === "declined") {
-                            echo '
-                            <tr class="declined">
-                                <td id="no">'.$cnt.'</td>
-                                <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                                <td id="dt">'.$postDate.'</td>
-                                <td id="tm">'.$postTime.'</td>
-                                <td id="sts">Declined by <a href="profile.php?id='.$actionUserName.'">'.$actionUserId.'</td>
-                            </tr>';                        
+                            declined($row, $cnt);                     
                         } elseif ($action === "moreInfo") {
-                            echo '
-                            <tr class="moreInfo">
-                                <td id="no">'.$cnt.'</td>
-                                <td id="sub"><a href="view.php?id='.$postId.'">'.$subject.'</a></td>
-                                <td id="dt">'.$postDate.'</td>
-                                <td id="tm">'.$postTime.'</td>
-                                <td id="sts">More information requested by <a href="profile.php?id='.$actionUserName.'">'.$actionUserId.'</td>
-                            </tr>';                        
+                            more_info($row, $cnt);                       
                         }
                     }
                     $cnt += 1;                
