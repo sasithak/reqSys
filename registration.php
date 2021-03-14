@@ -62,7 +62,7 @@
 	<label for="acc_type">Account type: </label>
         <select name="acc_type" id="acc_type" style="width: calc(100% - 23px)">
         	<option value="students">Student</option>
-		<option value="staff">Academic Staff</option>
+		    <option value="staff">Academic Staff</option>
 	</select>
 	<input type="submit" name="submit" value="Register" class="login-button">
         <p class="link"><a href="login.php">Click to Login</a></p>
