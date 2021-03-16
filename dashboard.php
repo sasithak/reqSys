@@ -22,14 +22,14 @@ include("auth_session.php");
     $name = $_SESSION["name"];
 
     if (isset($_GET["login"])) {
-        echo "<section><h3>Welcome $name</h3></section>";
+        echo '<section id="greeting"><h3>Welcome '.$name.'</h3></section>';
     }
 
     if ($accessLevel === 0) {
         echo '
-            <section id="new"><a href="./newRequest.php"><h3>Add new request</h3></a></section>
-            <section id="requests">
-                <h3>My requests</h3>';
+            <section class="requests">
+                <h2>My requests</h2>
+                <a href="./newRequest.php"><h3>Add new request</h3></a>';
         $sql = "SELECT * FROM discussions WHERE userId = '$userId';";
         $results = mysqli_query($conn, $sql);
         if ($results and mysqli_num_rows($results) > 0) {
@@ -72,6 +72,7 @@ include("auth_session.php");
         }
     } elseif ($accessLevel === 1) {
         ?>
+        <section class="filter-sec">
         <div class="filters">
             <h2>Filters</h2>
             <form method="post" action="./dashboard.php" class="filter">
@@ -114,6 +115,7 @@ include("auth_session.php");
                 <button class="filter-button">Filter</button>
             </form>
         </div>
+        </section>
         <?php
         if(isset($_POST['filter-hidden'])) {
             $status = $_POST['filter-status'];
@@ -124,6 +126,7 @@ include("auth_session.php");
             $sql = "WHERE";
             $setStatus = false;
             echo '
+            <section class="filters-applied">
             <div class="list">
                 <h2>Applied Filters</h2>
                 <table class="list-table">';
@@ -184,13 +187,15 @@ include("auth_session.php");
                 $sql = "SELECT * FROM discussions ".$sql.";";
                 echo '<br /><a href="./dashboard.php"><button class="filter-button">Reset</button></a>';
             } else {
-                echo "<h3>No filters applied</h3>";
+                echo "<h3>No filters applied</h3>
+                </section>";
                 $sql = "SELECT * FROM discussions;";
             }
         } else {
             $sql = "SELECT * FROM discussions WHERE currStatus='pending' OR currStatus LIKE '%more%';";
         }
         $results = mysqli_query($conn, $sql);
+        echo '<section class="requests">';
         if ($results and mysqli_num_rows($results) > 0) {
             $cnt = 1;
             echo '
@@ -226,10 +231,10 @@ include("auth_session.php");
             }
             echo '
                     </table>
-                </div>
-            </section>';
+                </div>';
         } else {
-            echo "<h2>No requests</h2>";
+            echo "<h2>No requests</h2>
+            </section>";
         }
     }
 
