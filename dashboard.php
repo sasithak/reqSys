@@ -22,7 +22,7 @@ include("auth_session.php");
     $name = $_SESSION["name"];
 
     if (isset($_GET["login"])) {
-        echo "<h3>Welcome $name</h3>";
+        echo "<section><h3>Welcome $name</h3></section>";
     }
 
     if ($accessLevel === 0) {
