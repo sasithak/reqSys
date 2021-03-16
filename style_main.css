@@ -1,0 +1,52 @@
+section {
+    width: 90vw;
+    padding: 10px;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    align-items: center;
+}
+
+#greeting {
+    padding: 5px;
+}
+
+.reqTable,
+.filter-table {
+    width: 100%;
+}
+
+.reqTable-data,
+.reqTable-headItem,
+.filter-item {
+    border: 2px solid #cecece;
+    border-collapse: collapse;
+    text-align: left;
+    table-layout: fixed;
+    padding: 10px;
+}
+
+.reqTable-headItem {
+    text-align: center;
+}
+
+.reqTable-heading {
+    background-color: lightseagreen;
+}
+.reqTable-approved {
+    background-color: lightgreen;
+}
+.reqTable-declined {
+    background-color: lightcoral;
+}
+.reqTable-pending {
+    background-color: rgb(252, 252, 141);
+}
+.reqTable-moreInfo {
+    background-color: lightsalmon;
+}
+
+a {
+    text-decoration: none;
+}
