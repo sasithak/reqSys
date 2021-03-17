@@ -84,46 +84,57 @@
     $result = mysqli_query($conn, $sql);
     
     if ($result and mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $postUsername = $row["userFullName"];
-        $postUserId = $row["userId"];
-        $postDate = $row["postDate"];
-        $postTime = $row["postTime"];
-        $content = $row["content"];
-        $file = $row["file"];
-        $ftp = $row["ftp"];
-        $fileLocation = $row["fileLocation"];
+        $threshold = mysqli_num_rows($result);
+        $cnt = 0;
+        echo '<section class="discussion">';
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+            $postUsername = $row["userFullName"];
+            $postUserId = $row["userId"];
+            $postDate = $row["postDate"];
+            $postTime = $row["postTime"];
+            $content = $row["content"];
+            $file = $row["file"];
+            $ftp = $row["ftp"];
+            $fileLocation = $row["fileLocation"];
 
-        echo '
-            <section class="heading">
-                <h3><span class="name"><a href="./profile.php?id='.$postUserId.'">'.$postUsername.'</a></span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
-            </section>
-            <section class="postBody">
-                <div class="content">
-                    <p>'.$content.'</p>
+            echo '
+                <div class="heading">
+                    <h3><span class="name"><a href="./profile.php?id='.$postUserId.'">'.$postUsername.'</a></span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
                 </div>
-                <div class = "attachments">
-                    <h4>Attachments</h4>';
-        if ($file === "yes") {
-            if ($ftp === "img"){
-                echo '
-                    <div class="image">
-                        <a href='.$fileLocation.' target="_blank"><img src='.$fileLocation.'></a>
-                    </div>';
-            } else {
-                echo '
-                    <div class="others">
-                        <ul><li>
-                        <p><a href='.$fileLocation.' target="_blank">Attachment</a>
-                        </li></ul>
+                <div class="postBody">
+                    <div class="content">
+                        <p>'.$content.'</p>
                     </div>
-                </section>';
+                    <div class = "attachments">
+                        <h4>Attachments</h4>';
+            if ($file === "yes") {
+                if ($ftp === "img"){
+                    echo '
+                        <div class="image">
+                            <a href='.$fileLocation.' target="_blank"><img src='.$fileLocation.'></a>
+                        </div>';
+                } else {
+                    echo '
+                        <div class="others">
+                            <ul><li>
+                            <p><a href='.$fileLocation.' target="_blank">Attachment</a>
+                            </li></ul>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo '<span id="noAttachments">No attachments</span>
+                </div>';
             }
-        } else {
-            echo '<span id="noAttachments">No attachments</span>';
+            echo '</div>';
+            $cnt = $cnt + 1;
+            if ($cnt !== $threshold) {
+                echo '<div class="separator"></div>';
+            }
+            
         }
-    }
+        echo '</section>';
     }
     echo '<br />';
     if (isset($_GET["reply"])) {
