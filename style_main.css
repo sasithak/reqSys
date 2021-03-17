@@ -49,4 +49,14 @@ section {
 
 a {
     text-decoration: none;
+    text-decoration: dashed;
+}
+
+section.discussion {
+    border-style: solid;
+}
+
+div.separator {
+    padding-top: 10px;
+    border-bottom-style: solid;
 }
