@@ -91,3 +91,19 @@ header a.active {
     background-color: blue;
     color: white;
 }
+
+#greeting {
+    border-bottom-style: solid;
+    width: 100vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+}
+
+.head-name {
+    border-bottom-style: solid;
+    width: 100vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+}
