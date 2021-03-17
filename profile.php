@@ -27,9 +27,16 @@ if (isset($_GET['id'])){
     </title>
     <link rel="stylesheet" href="./style_main.css">
     </head>
-    <body>';
-            head();
-            echo '
+    <body>
+    <header>
+        <table>
+            <tr>
+                <th><a href="./dashboard.php">Home</a></th>
+                <th><a class="active" href="./profile.php?id='.$userId.'">'.$name.'</a></th>
+                <th><a href="./logout.php">Logout</a></th>
+            </tr>
+        </table>
+    </header>
         </br>
         <section><h1>'.$displayName.'</h1></section>
         
@@ -63,9 +70,25 @@ if (isset($_GET['id'])){
         $displayName = $userData["firstname"]." ".$userData["lastname"];
         echo $displayName.'
     </title>
-    <body>';
-            head();
-            echo '
+    <link rel="stylesheet" href="./style_main.css">
+    </head>
+    <body>
+        <header>
+            <table>
+                <tr>
+                    <th><a href="./dashboard.php">Home</a></th>';
+                    if ($_SESSION["indexNo"] === $viewId) {
+                        echo '
+                        <th><a class="active" href="./profile.php?id='.$_SESSION["indexNo"].'">'.$name.'</a></th>';
+                    } else {
+                        echo '
+                        <th><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>';
+                    }
+                    echo '
+                    <th><a href="./logout.php">Logout</a></th>
+                </tr>
+            </table>
+        </header>
         </br>
         <section><h1>'.$displayName.'</h1></section>
         

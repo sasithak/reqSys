@@ -14,7 +14,18 @@ include("auth_session.php");
     <?php
     include_once './includes/func.inc.php';
     include_once './db.php';
-    head();
+    $name = $_SESSION["name"];
+    $uid =  $_SESSION["indexNo"];
+    echo '
+    <header>
+        <table>
+            <tr>
+                <th><a class="active" href="./dashboard.php">Home</a></th>
+                <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
+                <th><a href="./logout.php">Logout</a></th>
+            </tr>
+        </table>
+    </header>';
     
     $userId = $_SESSION["indexNo"];
     $username = $_SESSION["username"];
