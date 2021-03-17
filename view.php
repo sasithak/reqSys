@@ -99,7 +99,7 @@
             $fileLocation = $row["fileLocation"];
 
             echo '
-                <div class="heading">
+                <div class="disc-heading">
                     <h3><span class="name"><a href="./profile.php?id='.$postUserId.'">'.$postUsername.'</a></span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
                 </div>
                 <div class="postBody">
