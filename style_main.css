@@ -60,3 +60,34 @@ div.separator {
     padding-top: 10px;
     border-bottom-style: solid;
 }
+
+header {
+    overflow: hidden;
+    padding: 20px 10px;
+    margin: 0px;
+    border-bottom-style: solid;
+}
+
+header a {
+    color: black;
+    text-align: center;
+    padding: 12px;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+header table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header a:hover {
+    background-color: lightsalmon;
+    color: black;
+}
+
+header a.active {
+    background-color: blue;
+    color: white;
+}
