@@ -38,7 +38,7 @@ if (isset($_GET['id'])){
         </table>
     </header>
         </br>
-        <section><h1>'.$displayName.'</h1></section>
+        <section class="head-name"><h1>'.$displayName.'</h1></section>
         
         <section class="userData">
             <table style="text-align:left">
