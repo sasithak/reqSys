@@ -39,6 +39,8 @@ body {
     border-color: white;
 }
 
+.requests{
+    font-family:cursive;
 .requests a:hover {
     color: red;
 }
@@ -81,6 +83,15 @@ body {
 }
 .reqTable-moreInfo {
     background-color: lightsalmon;
+}
+
+.filters{
+    font-family: cursive;
+    color: rgb(47, 10, 214);
+}
+
+#filter{
+    color:tomato;
 }
 /*===============================================================================================*/
 /* view.php */

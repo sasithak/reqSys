@@ -114,7 +114,7 @@ include("auth_session.php");
         ?>
         <section class="filter-sec">
         <div class="filters">
-            <h2>Filters</h2>
+            <h2 id="filter">Filters</h2>
             <form method="post" action="./dashboard.php" class="filter">
                 <table class="filter-table">
                     <tr class="filter-row">
