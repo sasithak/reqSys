@@ -17,7 +17,7 @@ if(isset($_POST["submit"])) {
 
     $status = $action."-".$uid."-".$name;
 
-    $sql = "UPDATE discussions SET currStatus = '$status' WHERE postId = '$postId';";
+    $sql = "UPDATE discussions SET currStatus = '$status' readStatus = 'no' WHERE postId = '$postId';";
     mysqli_query($conn, $sql);
     
     header("Location: ../view.php?id=".$postId);

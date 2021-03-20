@@ -101,12 +101,23 @@ div.separator {
 /* profile.php */
 
 .head-name {
-    border-bottom-style: solid;
+    border-bottom-style: dotted;
     width: 100vw;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-top: 0px;
 }
+
+.userData{
+    font-size: x-large;
+    color: #e8ae5f;
+    border: 1px solid #a3ce4f;
+    border-style: dotted;
+    border-radius: 20px;
+    width: 90%;
+    
+}
+
 
 /*===============================================================================================*/
 /* header on all pages */

@@ -51,7 +51,7 @@
 	<input type="text" class="login-input" name="firstname" required />
 	<label>Last name:</label>
 	<input type="text" class="login-input" name="lastname" required />
-	<label>Index number:</label>
+	<label>Index number / Staff ID:</label>
 	<input type="text" class="login-input" name="index" required />
 	<label>Preferred username:</label>
         <input type="text" class="login-input" name="username" required />

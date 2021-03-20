@@ -124,7 +124,7 @@ function more_info($row, $cnt) {
 }
 
 function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $subject, $content, $status, $isFile, $ftp, $fileLocation) {
-    $sql = "INSERT INTO discussions (postId, userId, userName, userFullName, createdDate, createdTime, postSubject, currStatus) VALUES ('$postId', '$uid', '$userName', '$name', '$date', '$time', '$subject', '$status');";
+    $sql = "INSERT INTO discussions (postId, userId, userName, userFullName, createdDate, createdTime, postSubject, currStatus, readStatus) VALUES ('$postId', '$uid', '$userName', '$name', '$date', '$time', '$subject', '$status', 'yes');";
     if (mysqli_query($conn, $sql)) {
         $sql2 = "CREATE TABLE `".$postId."` (
             id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
