@@ -86,7 +86,7 @@ if (isset($_GET['id'])){
                         <th><a class="active" href="./profile.php?id='.$_SESSION["indexNo"].'">Profile</a></th>';
                     } else {
                         echo '
-                        <th><a href="./profile.php?id='.$uid.'">Profile</a></th>';
+                        <th><a href="./profile.php?id='.$_SESSION["indexNo"].'">Profile</a></th>';
                     }
                     echo '
                     <th><a href="./logout.php" class="logout">Logout</a></th>
