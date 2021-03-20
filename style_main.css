@@ -13,7 +13,7 @@ section {
 a {
     text-decoration: none;
     text-decoration: dashed;
-    color: rgb(31, 29, 29);
+    color: rgb(114, 176, 226);
 }
 
 /*===============================================================================================*/
@@ -29,12 +29,18 @@ body {
 #greeting {
 
     border-bottom-style: solid;
+    border-color: white;
     width: 100vw;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-top: 0px;
     align-items: center;
+    text-align: center;
+    color: red;
+    border-color: white;
 }
+
+
 
 .reqTable,
 .filter-table {
@@ -114,9 +120,10 @@ header {
 
 
 header a {
-    color: black;
+    color: rgb(243, 220, 9);
     text-align: center;
     padding: 12px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 18px;
     line-height: 25px;
     border-radius: 4px;
@@ -128,12 +135,12 @@ header table {
 }
 
 header a:hover {
-    background-color: lightsalmon;
-    color: black;
+    background-color: rgb(101, 109, 114);
+    color: rgb(216, 106, 16);
 }
 
 header a.active {
-    background-color:blue;
+    background-color:rgb(60, 60, 94);
     color: white;
 }
 
