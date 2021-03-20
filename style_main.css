@@ -43,6 +43,11 @@ body {
     color: red;
 }
 
+.reqTable td,
+.reqTable td a {
+    color: black;
+}
+
 .reqTable,
 .filter-table {
     width: 100%;
@@ -118,8 +123,8 @@ div.separator {
     width: 90%;
 }
 
-.userData td{
-    color:#82bef3;
+.userData td {
+    color: #82bef3;
 }
 
 /*===============================================================================================*/
