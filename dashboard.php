@@ -120,9 +120,9 @@ include("auth_session.php");
                             <label for="filter-status">Status</label><br /><br />
                             <select name="filter-status" id="filter-status">
                                 <option value="notSet"> </option>
-                                <option value="approved">approved</option>
-                                <option value="declined">declined</option>
-                                <option value="pending">pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="declined">Declined</option>
+                                <option value="pending">Pending</option>
                                 <option value="All">All</option>
                             </select>
                         </td>
