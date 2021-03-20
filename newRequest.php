@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head id="nr_head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Request</title>
@@ -26,7 +26,7 @@
     <section class="requesting">
         <form action="./includes/newRequest.inc.php" method="post" class="new" enctype="multipart/form-data">
             <label for="subject">Request Type: </label>
-            <select name="subject" id="subject">
+            <select class="requesting_list" name="subject" id="subject">
                 <option value="notSet"> </option>
                 <option value="late-add-drop">Late add/drop request</option>
                 <option value="extend-submission">Extend submission deadline</option>
@@ -35,9 +35,9 @@
             <br /><br />
             <textarea name="content" id="content" placeholder="Content"></textarea>
             <br /><br />
-            <input type="file" name="file">
+            <input id="file_input" type="file" name="file">
             <br /><br />
-            <button type="submit" name="submit">Post</button>
+            <button id="submit_button" type="submit" name="submit">Post</button>
         </form>
         <?php
             if (isset($_GET["incomplete"])) {
