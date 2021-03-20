@@ -134,6 +134,7 @@ if (isset($_GET['id'])){
                             <tr class="reqTable-heading" >
                                 <th class="reqTable-headItem no">No.</th>
                                 <th class="reqTable-headItem subject">Subject</th>
+                                <th class="reqTable-headItem date">Created User</th>
                                 <th class="reqTable-headItem date">Created Date</th>
                                 <th class="reqTable-headItem time">Created Time</th>
                                 <th class="reqTable-headItem status">Status</th>
