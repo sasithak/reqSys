@@ -21,7 +21,7 @@ include("auth_session.php");
         <table>
             <tr>
                 <th><a class="active" href="./dashboard.php">Home</a></th>
-                <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
+                <th><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
                 <th><a href="./logout.php">Logout</a></th>
             </tr>
         </table>
@@ -33,7 +33,7 @@ include("auth_session.php");
     $name = $_SESSION["name"];
 
     if (isset($_GET["login"])) {
-        echo '<section id="greeting"><h3>Welcome '.$name.'</h3></section>';
+        echo '<section id="greeting"><h1>Welcome '.$name.'</h1></section>';
     }
 
     if ($accessLevel === 0) {
@@ -108,7 +108,7 @@ include("auth_session.php");
                 </div>
             </section>';
         } else {
-            echo '<div><h3>No posts to display</h3></div>';
+            echo '<div><h4>No posts to display</h4></div>';
         }
     } elseif ($accessLevel === 1) {
         ?>
