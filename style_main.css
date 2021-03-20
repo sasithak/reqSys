@@ -27,7 +27,6 @@ body {
 /* dashboard.php */
 
 #greeting {
-
     border-bottom-style: solid;
     border-color: white;
     width: 100vw;
@@ -42,8 +41,14 @@ body {
 
 .requests{
     font-family:cursive;
+.requests a:hover {
+    color: red;
 }
 
+.reqTable td,
+.reqTable td a {
+    color: black;
+}
 
 .reqTable,
 .filter-table {
@@ -109,6 +114,10 @@ div.separator {
     padding-bottom: 20px;
 }
 
+.reply{
+    color : #cdd047;
+    margin-left: 50px;
+
 /*===============================================================================================*/
 /* profile.php */
 
@@ -120,16 +129,18 @@ div.separator {
     margin-top: 0px;
 }
 
-.userData{
+.userData {
     font-size: x-large;
     color: #e8ae5f;
     border: 1px solid #a3ce4f;
     border-style: dotted;
     border-radius: 20px;
     width: 90%;
-    
 }
 
+.userData td {
+    color: #82bef3;
+}
 
 /*===============================================================================================*/
 /* header on all pages */
@@ -141,12 +152,11 @@ header {
     border-bottom-style: solid;
 }
 
-
 header a {
     color: rgb(243, 220, 9);
     text-align: center;
     padding: 12px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     font-size: 18px;
     line-height: 25px;
     border-radius: 4px;
@@ -163,7 +173,7 @@ header a:hover {
 }
 
 header a.active {
-    background-color:rgb(60, 60, 94);
+    background-color: rgb(60, 60, 94);
     color: white;
 }
 
