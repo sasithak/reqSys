@@ -37,6 +37,35 @@ include("auth_session.php");
     }
 
     if ($accessLevel === 0) {
+        $sql1 = "SELECT * FROM discussions WHERE userId = '$userId' AND readStatus = 'no';";
+        $results1 = mysqli_query($conn, $sql1);
+        if ($results1 and mysqli_num_rows($results1) > 0) {
+            echo '
+            <section class="notifications">
+                <h2>Notifications</h2>
+                <ul class="notification-list">
+                ';
+            while($row1 = mysqli_fetch_assoc($results1)) {
+                $status = $row1["currStatus"];
+                $arr1 = explode("-", $status);
+                $action = $arr1[0];
+                $postId1 = $row1["postId"];
+                $postId2 = explode("-", $postId1);
+                $postId = end($postId2);
+
+                if ($action === "approved") {
+                    echo '<li class="notification-item">Your request has been approved.<br>Click <a href="./view.php?id='.$postId.'&notification=reset">here</a> to view more.';
+                } elseif ($action === "declined") {
+                    echo '<li class="notification-item">Your request has been declined.<br>Click <a href="./view.php?id='.$postId.'&notification=reset">here</a> to view more.';                     
+                } elseif ($action === "moreInfo") {
+                    echo '<li class="notification-item">More info requested on your request.<br>Click <a href="./view.php?id='.$postId.'&notification=reset">here</a> to view more.';
+                }
+                
+            }
+            echo '</ul></section>';
+        }
+
+
         echo '
             <section class="requests">
                 <h2>My requests</h2>

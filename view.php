@@ -13,6 +13,12 @@
         header("Location: dashboard.php");
         exit();
     }
+
+    if (isset($notification)) {
+        $sql = "UPDATE discussions SET readStatus = 'yes' WHERE postId = '$postId'";
+        $results = mysqli_query($conn, $sql);
+    }
+
     $string = explode("-", $postId);
     $postUid = end($string);
     if ($accessLevel === 0 and $userId != $postUid) {
