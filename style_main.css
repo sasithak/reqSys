@@ -26,7 +26,7 @@ body {
 textarea {
     margin-left: 7%;
     background: rgb(68, 68, 68);
-    color:white;
+    color: white;
     padding-right: 113pt;
     padding-bottom: 60pt;
     border-color: black;
@@ -36,11 +36,10 @@ textarea {
 
 button {
     background: rgb(68, 68, 68);
-    color:white ;
+    color: white;
     border-color: black;
     border-width: 1px;
 }
-
 
 /*===============================================================================================*/
 /* dashboard.php */
@@ -58,8 +57,9 @@ button {
     border-color: white;
 }
 
-.requests{
-    font-family:cursive;
+.requests {
+    font-family: cursive;
+}
 .requests a:hover {
     color: red;
 }
@@ -104,13 +104,13 @@ button {
     background-color: lightsalmon;
 }
 
-.filters{
+.filters {
     font-family: cursive;
     color: rgb(47, 10, 214);
 }
 
-#filter{
-    color:tomato;
+#filter {
+    color: tomato;
 }
 /*===============================================================================================*/
 /* view.php */
@@ -202,21 +202,21 @@ header a.active {
 /*===============================================================================================*/
 /* new requests.php */
 
-#nr_head{
+#nr_head {
     color: yellow;
 }
-.requesting_list{
+.requesting_list {
     background: rgb(68, 68, 68);
-    color : rgb(173, 173, 173);
+    color: rgb(173, 173, 173);
     border-color: Black;
 }
 
-#file_input{
+#file_input {
     margin-left: 7%;
     /* color: black;
     background-color: rgb(68, 68, 68); */
 }
 
-#submit_button{
+#submit_button {
     margin-left: 7%;
 }
