@@ -21,10 +21,10 @@ a {
 body {
     background: rgb(54, 51, 51);
     color: rgb(248, 248, 248);
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 textarea {
-    margin-left: 7%;
     background: rgb(68, 68, 68);
     color: white;
     padding-right: 113pt;
@@ -57,9 +57,6 @@ button {
     border-color: white;
 }
 
-.requests {
-    font-family: cursive;
-}
 .requests a:hover {
     color: red;
 }
@@ -105,7 +102,6 @@ button {
 }
 
 .filters {
-    font-family: cursive;
     color: rgb(47, 10, 214);
 }
 
@@ -174,7 +170,7 @@ header {
 
 header a {
     color: rgb(243, 220, 9);
-    text-align: center;
+    text-align: right;
     padding: 12px;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     font-size: 18px;
@@ -182,9 +178,12 @@ header a {
     border-radius: 4px;
 }
 
+.logout {
+    color: red;
+}
+
 header table {
     margin-left: auto;
-    margin-right: auto;
 }
 
 header a:hover {
@@ -218,5 +217,9 @@ header a.active {
 }
 
 #submit_button {
+    margin-left: 7%;
+}
+
+textarea #content {
     margin-left: 7%;
 }

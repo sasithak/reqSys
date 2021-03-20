@@ -21,8 +21,8 @@ include("auth_session.php");
         <table>
             <tr>
                 <th><a class="active" href="./dashboard.php">Home</a></th>
-                <th><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
-                <th><a href="./logout.php">Logout</a></th>
+                <th><a href="./profile.php?id='.$uid.'">Profile</a></th>
+                <th><a href="./logout.php" class="logout">Logout</a></th>
             </tr>
         </table>
     </header>';
@@ -66,8 +66,8 @@ include("auth_session.php");
 
         echo '
             <section class="requests">
-                <h2>My requests</h2>
-                <a href="./newRequest.php"><h3>Add new request</h3></a>';
+                <a href="./newRequest.php"><h3>Add new request</h3></a>
+                <h2>My requests</h2>';
         $sql = "SELECT * FROM discussions WHERE userId = '$userId';";
         $results = mysqli_query($conn, $sql);
         if ($results and mysqli_num_rows($results) > 0) {

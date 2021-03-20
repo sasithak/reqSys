@@ -32,8 +32,8 @@ if (isset($_GET['id'])){
         <table>
             <tr>
                 <th><a href="./dashboard.php">Home</a></th>
-                <th><a class="active" href="./profile.php?id='.$userId.'">'.$name.'</a></th>
-                <th><a href="./logout.php">Logout</a></th>
+                <th><a class="active" href="./profile.php?id='.$userId.'">Profile</a></th>
+                <th><a href="./logout.php" class="logout">Logout</a></th>
             </tr>
         </table>
     </header>
@@ -83,13 +83,13 @@ if (isset($_GET['id'])){
                     <th><a href="./dashboard.php">Home</a></th>';
                     if ($_SESSION["indexNo"] === $viewId) {
                         echo '
-                        <th><a class="active" href="./profile.php?id='.$_SESSION["indexNo"].'">'.$name.'</a></th>';
+                        <th><a class="active" href="./profile.php?id='.$_SESSION["indexNo"].'">Profile</a></th>';
                     } else {
                         echo '
-                        <th><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>';
+                        <th><a href="./profile.php?id='.$uid.'">Profile</a></th>';
                     }
                     echo '
-                    <th><a href="./logout.php">Logout</a></th>
+                    <th><a href="./logout.php" class="logout">Logout</a></th>
                 </tr>
             </table>
         </header>

@@ -8,8 +8,8 @@ function head() {
         <table>
             <tr>
                 <th><a href="./dashboard.php">Home</a></th>
-                <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
-                <th><a href="./logout.php">Logout</a></th>
+                <th><a href="#"><a href="./profile.php?id='.$uid.'">Profile</a></th>
+                <th><a href="./logout.php" class="logout">Logout</a></th>
             </tr>
         </table>
     </header>';
