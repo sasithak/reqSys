@@ -21,7 +21,7 @@ include("auth_session.php");
         <table>
             <tr>
                 <th><a class="active" href="./dashboard.php">Home</a></th>
-                <th><a href="#"><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
+                <th><a href="./profile.php?id='.$uid.'">'.$name.'</a></th>
                 <th><a href="./logout.php">Logout</a></th>
             </tr>
         </table>
