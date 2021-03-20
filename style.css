@@ -50,6 +50,7 @@ h1.login-title {
 h3 {
     font-weight: normal;
     text-align: center;
+    color: #558855;
 }
 select {
     height: 20px;
