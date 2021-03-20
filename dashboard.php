@@ -169,7 +169,10 @@ include("auth_session.php");
                 <h2>Applied Filters</h2>
                 <table class="list-table">';
             if($status !== "notSet") {
-                $sql = $sql." status='$status'";
+                if ($setStatus) {
+                    $sql = $sql."AND ";
+                }
+                $sql = $sql." currStatus LIKE '%$status%'";
                 $setStatus = true;
                 echo '
                     <tr>
@@ -178,6 +181,9 @@ include("auth_session.php");
                     </tr>';
             }
             if($subject !== "notSet") {
+                if ($setStatus) {
+                    $sql = $sql."AND ";
+                }
                 if ($subject === "late-add-drop") {
                     $subject = "Late add or drop request";
                 } elseif ($subject === "extend-submission") {
@@ -194,6 +200,9 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($index)) {
+                if ($setStatus) {
+                    $sql = $sql."AND ";
+                }
                 $sql = $sql." userId='$index'";
                 $setStatus = true;
                 echo '
@@ -203,6 +212,9 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($uname)) {
+                if ($setStatus) {
+                    $sql = $sql."AND ";
+                }
                 $sql = $sql." userName='$uname'";
                 $setStatus = true;
                 echo '
@@ -212,6 +224,9 @@ include("auth_session.php");
                     </tr>';
             }
             if(!empty($fi_name)) {
+                if ($setStatus) {
+                    $sql = $sql."AND ";
+                }
                 $sql = $sql." userFullName='$fi_name'";
                 $setStatus = true;
                 echo '

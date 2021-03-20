@@ -122,10 +122,10 @@
             echo '
                     <div class="content">
                         <p>'.$content.'</p>
-                    </div>
-                    <div class = "attachments">
-                        <h4>Attachments</h4>';
+                    </div>';
             if ($file === "yes") {
+                echo '<div class = "attachments">
+                        <h4>Attachments</h4>';
                 if ($ftp === "img"){
                     echo '
                         <div class="image">
@@ -140,9 +140,8 @@
                         </div>
                     </div>';
                 }
+                echo '</div>';
             } else {
-                echo '<span id="noAttachments">No attachments</span>
-                </div>';
             }
             echo '</div>';
             $cnt = $cnt + 1;

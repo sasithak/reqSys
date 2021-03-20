@@ -10,6 +10,19 @@ section {
     align-items: center;
 }
 
+input {
+    background: rgb(68, 68, 68);
+    color: rgb(173, 173, 173);
+    border-color: Black;
+    border-width: 1px;
+}
+
+select {
+    background: rgb(68, 68, 68);
+    color: rgb(173, 173, 173);
+    border-color: Black;
+}
+
 a {
     text-decoration: none;
     text-decoration: dashed;
@@ -53,7 +66,7 @@ button {
     margin-top: 0px;
     align-items: center;
     text-align: center;
-    color: red;
+    color: rgb(67, 223, 114);
     border-color: white;
 }
 
@@ -102,7 +115,7 @@ button {
 }
 
 .filters {
-    color: rgb(47, 10, 214);
+    color: greenyellow;
 }
 
 #filter {
