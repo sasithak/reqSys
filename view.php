@@ -104,11 +104,22 @@
             $ftp = $row["ftp"];
             $fileLocation = $row["fileLocation"];
 
+            if ($cnt === 0) {
+                echo '<div class="disc-heading">';
+            }
+            else {
+                echo '<div class="disc-heading reply">';
+            }
             echo '
-                <div class="disc-heading">
                     <h3><span class="name"><a href="./profile.php?id='.$postUserId.'">'.$postUsername.'</a></span> <span class="datetime">'.$postDate.' '.$postTime.'</span></h3>
-                </div>
-                <div class="postBody">
+                </div>';
+            if ($cnt === 0) {
+                echo '<div class="postBody">';
+            }
+            else {
+                echo '<div class="postBody reply">';
+            }
+            echo '
                     <div class="content">
                         <p>'.$content.'</p>
                     </div>
