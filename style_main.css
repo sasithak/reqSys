@@ -57,6 +57,10 @@ button {
 /*===============================================================================================*/
 /* dashboard.php */
 
+.list-table .list-heading {
+    color: #e8ae5f;
+}
+
 #greeting {
     border-bottom-style: solid;
     border-color: white;
@@ -224,7 +228,7 @@ header a.active {
 }
 
 #file_input {
-    margin-left: 7%;
+    /*margin-left: 7%;*/
     /* color: black;
     background-color: rgb(68, 68, 68); */
 }

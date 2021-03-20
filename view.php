@@ -183,13 +183,13 @@
         <section class="operations">
             <h2>Actions</h2>
             <form action="includes/requestOperations.inc.php" method="post">
+                <label for="operation">Select Action: </label>
                 <select name="operation" id="operation">
                     <option value="error"> </option>
                     <option value="approved">Approve</option>
                     <option value="declined">Decline</option>
                     <option value="moreInfo">Request more info</option>
                 </select>
-                <label for="operation">Select Action: </label>
                 <br /><br />
                 <input type="hidden" id="postId" name="postId" value="'.$postId.'">
                 <button type="submit" name="submit">Send</button>

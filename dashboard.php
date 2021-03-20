@@ -171,6 +171,11 @@ include("auth_session.php");
                 <table class="list-table">';
             if ($status === "All") {
                 $sql = "SELECT * FROM discussions;";
+                echo '<tr>
+                        <td class="list-heading">Status : </td>
+                        <td class="list-data">'.$status.'
+                    </tr>
+                    </table>';
             }
             else {
             if($status !== "notSet") {
@@ -181,7 +186,7 @@ include("auth_session.php");
                 $setStatus = true;
                 echo '
                     <tr>
-                        <td class="list-heading">Status</td>
+                        <td class="list-heading">Status : </td>
                         <td class="list-data">'.$status.'
                     </tr>';
             }
@@ -200,7 +205,7 @@ include("auth_session.php");
                 $setStatus = true;
                 echo '
                     <tr>
-                        <td class="list-heading">Type</td>
+                        <td class="list-heading">Type : </td>
                         <td class="list-data">'.$subject.'
                     </tr>';
             }
@@ -212,7 +217,7 @@ include("auth_session.php");
                 $setStatus = true;
                 echo '
                     <tr>
-                        <td class="list-heading">Index No.</td>
+                        <td class="list-heading">Index No. : </td>
                         <td class="list-data">'.$index.'
                     </tr>';
             }
@@ -224,7 +229,7 @@ include("auth_session.php");
                 $setStatus = true;
                 echo '
                     <tr>
-                        <td class="list-heading">User Name</td>
+                        <td class="list-heading">User Name : </td>
                         <td class="list-data">'.$uname.'
                     </tr>';
             }
@@ -236,7 +241,7 @@ include("auth_session.php");
                 $setStatus = true;
                 echo '
                     <tr>
-                        <td class="list-heading">Name</td>
+                        <td class="list-heading">Name : </td>
                         <td class="list-data">'.$fi_name.'
                     </tr>';
             }
