@@ -40,6 +40,9 @@ body {
     border-color: white;
 }
 
+.requests{
+    font-family:cursive;
+}
 
 
 .reqTable,
@@ -75,6 +78,15 @@ body {
 }
 .reqTable-moreInfo {
     background-color: lightsalmon;
+}
+
+.filters{
+    font-family: cursive;
+    color: rgb(47, 10, 214);
+}
+
+#filter{
+    color:tomato;
 }
 /*===============================================================================================*/
 /* view.php */
