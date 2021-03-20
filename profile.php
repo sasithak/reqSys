@@ -44,18 +44,22 @@ if (isset($_GET['id'])){
             <table style="text-align:left">
                 <tr>
                     <th>Index No</th>
+                    <td>:</td>
                     <td>'.$userData["indexNo"].'</td>
                 </tr>
                 <tr>
                     <th>First Name</th>
+                    <td>:</td>
                     <td>'.$userData["firstname"].'</td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
+                    <td>:</td>
                     <td>'.$userData["lastname"].'</td>
                 </tr>
                 <tr>
                     <th>Email</th>
+                    <td>:</td>
                     <td>'.$userData["email"].'</td>
                 </tr>
             </table>
@@ -96,18 +100,22 @@ if (isset($_GET['id'])){
             <table style="text-align:left">
                 <tr>
                     <th>Index No</th>
+                    <td>:</td>
                     <td>'.$userData["indexNo"].'</td>
                 </tr>
                 <tr>
                     <th>First Name</th>
+                    <td>:</td>
                     <td>'.$userData["firstname"].'</td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
+                    <td>:</td>
                     <td>'.$userData["lastname"].'</td>
                 </tr>
                 <tr>
                     <th>Email</th>
+                    <td>:</td>
                     <td>'.$userData["email"].'</td>
                 </tr>
             </table>
