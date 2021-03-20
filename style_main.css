@@ -27,11 +27,13 @@ body {
 /* dashboard.php */
 
 #greeting {
+
     border-bottom-style: solid;
     width: 100vw;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-top: 0px;
+    align-items: center;
 }
 
 .reqTable,
@@ -131,7 +133,7 @@ header a:hover {
 }
 
 header a.active {
-    background-color: blue;
+    background-color:blue;
     color: white;
 }
 
