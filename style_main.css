@@ -6,16 +6,24 @@ section {
     margin: 20px;
     margin-left: auto;
     margin-right: auto;
-    background:white;
+    background: rgb(54, 51, 51);
     align-items: center;
 }
 
 a {
     text-decoration: none;
     text-decoration: dashed;
-    color: black;
+    color: rgb(31, 29, 29);
 }
 
+/*===============================================================================================*/
+/*Body*/
+body {
+    background: rgb(54, 51, 51);
+    color: rgb(248, 248, 248);
+}
+
+/*===============================================================================================*/
 /* dashboard.php */
 
 #greeting {
@@ -62,7 +70,7 @@ a {
 .reqTable-moreInfo {
     background-color: lightsalmon;
 }
-
+/*===============================================================================================*/
 /* view.php */
 
 section.discussion {
@@ -83,6 +91,7 @@ div.separator {
     padding-bottom: 20px;
 }
 
+/*===============================================================================================*/
 /* profile.php */
 
 .head-name {
@@ -93,6 +102,7 @@ div.separator {
     margin-top: 0px;
 }
 
+/*===============================================================================================*/
 /* header on all pages */
 
 header {
@@ -101,6 +111,7 @@ header {
     margin: 0px;
     border-bottom-style: solid;
 }
+
 
 header a {
     color: black;
