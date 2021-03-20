@@ -123,6 +123,7 @@ include("auth_session.php");
                                 <option value="approved">approved</option>
                                 <option value="declined">declined</option>
                                 <option value="pending">pending</option>
+                                <option value="All">All</option>
                             </select>
                         </td>
                         <td class="filter-item">
@@ -168,6 +169,10 @@ include("auth_session.php");
             <div class="list">
                 <h2>Applied Filters</h2>
                 <table class="list-table">';
+            if ($status === "All") {
+                $sql = "SELECT * FROM discussions;";
+            }
+            else {
             if($status !== "notSet") {
                 if ($setStatus) {
                     $sql = $sql."AND ";
@@ -243,6 +248,7 @@ include("auth_session.php");
                 echo "<h3>No filters applied</h3>
                 </section>";
                 $sql = "SELECT * FROM discussions;";
+            }
             }
         } else {
             $sql = "SELECT * FROM discussions WHERE currStatus='pending' OR currStatus LIKE '%more%';";
