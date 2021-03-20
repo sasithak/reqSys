@@ -1,3 +1,5 @@
+/* Common to all pages */
+
 section {
     width: 90vw;
     padding: 10px;
@@ -8,11 +10,22 @@ section {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    text-decoration: dashed;
+    color: black;
+}
+
+/* dashboard.php */
+
 #greeting {
-    padding: 5px;
-    text-align: center;
-    background:rgb(48, 66, 167);
-    width: 1vw;
+
+    border-bottom-style: solid;
+    width: 100vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+    align-items: center;
 }
 
 .reqTable,
@@ -50,10 +63,7 @@ section {
     background-color: lightsalmon;
 }
 
-a {
-    text-decoration: none;
-    text-decoration: dashed;
-}
+/* view.php */
 
 section.discussion {
     border-style: solid;
@@ -63,6 +73,27 @@ div.separator {
     padding-top: 10px;
     border-bottom-style: solid;
 }
+
+.disc-heading {
+    border-bottom-style: dashed;
+    padding-top: 20px;
+}
+
+.postBody {
+    padding-bottom: 20px;
+}
+
+/* profile.php */
+
+.head-name {
+    border-bottom-style: solid;
+    width: 100vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+}
+
+/* header on all pages */
 
 header {
     overflow: hidden;
@@ -95,27 +126,4 @@ header a.active {
     color: white;
 }
 
-#greeting {
-    border-bottom-style: solid;
-    width: 100vw;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top: 0px;
-}
-
-.head-name {
-    border-bottom-style: solid;
-    width: 100vw;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top: 0px;
-}
-
-.disc-heading {
-    border-bottom-style: dashed;
-    padding-top: 20px;
-}
-
-.postBody {
-    padding-bottom: 20px;
-}
+/*fmksdlfnlstha*/
