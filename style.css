@@ -1,5 +1,6 @@
 body {
     background: #3e4144;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .form {
     margin: 50px auto;
@@ -19,8 +20,8 @@ h1.login-title {
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 25px;
-    height: 25px;
-    width: calc(100% - 23px);
+    height: 20px;
+    width: 90%;
 }
 .login-input:focus {
     border-color: #6e8095;
@@ -28,25 +29,28 @@ h1.login-title {
 }
 .login-button {
     color: #fff;
-    background: #55a1ff;
+    background: #000055;
     border: 0;
     outline: 0;
-    width: 100%;
+    width: 40%;
     height: 50px;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
 }
 .link {
-    color: #666;
+    color: #000000;
     font-size: 15px;
     text-align: center;
     margin-bottom: 0px;
 }
 .link a {
-    color: #666;
+    color: #0000ff;
 }
 h3 {
     font-weight: normal;
     text-align: center;
+}
+select {
+    height: 20px;
 }

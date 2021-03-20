@@ -46,11 +46,12 @@
 ?>
     <form class="form" method="post" name="login">
         <h1 class="login-title">Login</h1>
-	<label for="username">Username:</label>
-        <input type="text" class="login-input" name="username"/>
-	<label for="password">Password:</label>
-        <input type="password" class="login-input" name="password"/>
-        <input type="submit" value="Login" name="Log in" class="login-button"/>
+	<label for="username">Username:</label><br>
+        <input type="text" class="login-input" name="username"/><br>
+	<label for="password">Password:</label><br>
+        <input type="password" class="login-input" name="password"/><br>
+	<hr color="#0000ff">
+        <center><input type="submit" value="Login" name="Log in" class="login-button"/></center>
 	<p>Not a member?</p>
         <p class="link">Click here to <a href="registration.php">Register.</a></p>
     <?php

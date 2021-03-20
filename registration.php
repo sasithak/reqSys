@@ -47,25 +47,26 @@
 
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
-	<label>First name:</label>
-	<input type="text" class="login-input" name="firstname" required />
-	<label>Last name:</label>
-	<input type="text" class="login-input" name="lastname" required />
-	<label>Index number / Staff ID:</label>
-	<input type="text" class="login-input" name="index" required />
-	<label>Preferred username:</label>
-        <input type="text" class="login-input" name="username" required />
-	<label>Email address:</label>
-        <input type="text" class="login-input" name="email">
-	<label>Password:</label>
-        <input type="password" class="login-input" name="password">
-	<label for="acc_type">Account type: </label>
+	<label>First name:</label><br>
+	<input type="text" class="login-input" name="firstname" required /><br>
+	<label>Last name:</label><br>
+	<input type="text" class="login-input" name="lastname" required /><br>
+	<label>Index number / Staff ID:</label><br>
+	<input type="text" class="login-input" name="index" required /><br>
+	<label>Preferred username:</label><br>
+        <input type="text" class="login-input" name="username" required /><br>
+	<label>Email address:</label><br>
+        <input type="text" class="login-input" name="email"><br>
+	<label>Password:</label><br>
+        <input type="password" class="login-input" name="password"><br>
+	<label for="acc_type">Account type: </label><br>
         <select name="acc_type" id="acc_type" style="width: calc(100% - 23px)">
         	<option value="students">Student</option>
 		    <option value="staff">Academic Staff</option>
-	</select>
-	<input type="submit" name="submit" value="Register" class="login-button">
-        <p class="link"><a href="login.php">Click to Login</a></p>
+	</select><br>
+	<hr color="#000055">
+	<center><input type="submit" name="submit" value="Register" class="login-button"><center>
+        <p class="link">Click to <a href="login.php">Login</a></p>
     </form>
 
 <?php
