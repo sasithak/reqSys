@@ -49,8 +49,8 @@ if (isset($_POST["submit"])) {
         
     }
     addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content, $isFile, $ftp, $fileLocation);
-    header("Location: ../view.php?id=".$postId);
-    exit();
+    //header("Location: ../view.php?id=".$postId);
+    //exit();
     
 } else {
     header("location: ../dashboard.php");

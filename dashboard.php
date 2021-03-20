@@ -49,9 +49,7 @@ include("auth_session.php");
                 $status = $row1["currStatus"];
                 $arr1 = explode("-", $status);
                 $action = $arr1[0];
-                $postId1 = $row1["postId"];
-                $postId2 = explode("-", $postId1);
-                $postId = end($postId2);
+                $postId = $row1["postId"];
 
                 if ($action === "approved") {
                     echo '<li class="notification-item">Your request has been approved.<br>Click <a href="./view.php?id='.$postId.'&notification=reset">here</a> to view more.';

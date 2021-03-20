@@ -14,7 +14,7 @@
         exit();
     }
 
-    if (isset($notification)) {
+    if (isset($_GET["notification"])) {
         $sql = "UPDATE discussions SET readStatus = 'yes' WHERE postId = '$postId'";
         $results = mysqli_query($conn, $sql);
     }

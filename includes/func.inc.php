@@ -155,6 +155,8 @@ function createRequest($conn, $postId, $uid, $userName, $name, $date, $time, $su
 function addEntry($conn, $postId, $uid, $userName, $name, $date, $time, $content, $isFile, $ftp, $fileLocation) {
     $sql = "INSERT INTO `".$postId."` (userId, userName, userFullName, postDate, postTime, content, file, ftp, fileLocation) VALUES ('$uid', '$userName', '$name', '$date', '$time', '$content', '$isFile', '$ftp', '$fileLocation')";
     mysqli_query($conn, $sql);
+    $err = mysqli_error($conn);
+    echo $err;
 }
 
 function getUser($conn, $viewId) {
