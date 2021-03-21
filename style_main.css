@@ -213,8 +213,6 @@ header a.active {
     color: white;
 }
 
-/*fmksdlfnlstha*/
-
 /*===============================================================================================*/
 /* new requests.php */
 
@@ -227,11 +225,13 @@ header a.active {
     border-color: Black;
 }
 
+/*
 #file_input {
-    /*margin-left: 7%;*/
-    /* color: black;
-    background-color: rgb(68, 68, 68); */
+    margin-left: 7%;
+    color: black;
+    background-color: rgb(68, 68, 68);
 }
+*/
 
 #submit_button {
     margin-left: 7%;
