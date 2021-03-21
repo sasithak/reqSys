@@ -40,11 +40,13 @@ body {
 textarea {
     background: rgb(68, 68, 68);
     color: white;
-    padding-right: 113pt;
-    padding-bottom: 60pt;
+    padding-right: 10pt;
+    padding-bottom: 10pt;
     border-color: black;
     border-width: 1px;
     border-radius: 5pt;
+    width: 60vw;
+    height: 100px;
 }
 
 button {
