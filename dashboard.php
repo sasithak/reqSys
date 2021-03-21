@@ -180,9 +180,13 @@ include("auth_session.php");
             else {
             if($status !== "notSet") {
                 if ($setStatus) {
-                    $sql = $sql."AND ";
+                    $sql = $sql." AND ";
                 }
                 $sql = $sql." currStatus LIKE '%$status%'";
+                if ($status === "pending") {
+                    $sql = $sql." OR ";
+                    $sql = $sql." currStatus LIKE '%more%'";
+                }
                 $setStatus = true;
                 echo '
                     <tr>
@@ -192,7 +196,7 @@ include("auth_session.php");
             }
             if($subject !== "notSet") {
                 if ($setStatus) {
-                    $sql = $sql."AND ";
+                    $sql = $sql." AND ";
                 }
                 if ($subject === "late-add-drop") {
                     $subject = "Late add or drop request";
@@ -211,7 +215,7 @@ include("auth_session.php");
             }
             if(!empty($index)) {
                 if ($setStatus) {
-                    $sql = $sql."AND ";
+                    $sql = $sql." AND ";
                 }
                 $sql = $sql." userId='$index'";
                 $setStatus = true;
@@ -223,7 +227,7 @@ include("auth_session.php");
             }
             if(!empty($uname)) {
                 if ($setStatus) {
-                    $sql = $sql."AND ";
+                    $sql = $sql." AND ";
                 }
                 $sql = $sql." userName='$uname'";
                 $setStatus = true;
@@ -235,7 +239,7 @@ include("auth_session.php");
             }
             if(!empty($fi_name)) {
                 if ($setStatus) {
-                    $sql = $sql."AND ";
+                    $sql = $sql." AND ";
                 }
                 $sql = $sql." userFullName='$fi_name'";
                 $setStatus = true;
