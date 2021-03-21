@@ -11,7 +11,8 @@ include_once 'func.inc.php';
 
 if (isset($_POST["submit"])) {
     $postId = $_POST["postId"];
-    $content = $_POST["content"];
+    $content = str_replace("'", "''", $_POST["content"]);
+    $content = htmlspecialchars($content);
     $postDirectory = "../discussions/uploads/".$postId;
     date_default_timezone_set("Asia/Colombo");
     $date = "".date("Y/m/d");

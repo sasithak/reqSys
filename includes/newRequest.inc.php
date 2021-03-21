@@ -10,7 +10,8 @@ include_once 'func.inc.php';
 
 if (isset($_POST["submit"])) {
     $subject = $_POST["subject"];
-    $content = htmlspecialchars($_POST["content"]);
+    $content = str_replace("'", "''", $_POST["content"]);
+    $content = htmlspecialchars($content);
     $status = "pending";
     $postId = uniqid("", true)."-".$uid;
     $postDirectory = "../discussions/uploads/".$postId;
